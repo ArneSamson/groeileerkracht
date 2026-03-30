@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import CameraHandler from "./helper/CameraHandler.jsx";
+import { CameraControls } from "@react-three/drei";
 
 import Scene from "./components/Scene.jsx";
 import Lights from "./components/lighting/Lights.jsx";
@@ -19,6 +20,8 @@ return (
         <Perf position='top-left' style={{ transform: "translateX(0vw)" }} />
 
         {/* <CameraHandler /> */}
+
+        <CameraControls makeDefault />
 
         <Lights />
 

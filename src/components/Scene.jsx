@@ -1,4 +1,5 @@
 import React from "react";
+import Ground from "./floor/Ground";
 
 export default function Scene() {
   return (
@@ -8,6 +9,7 @@ export default function Scene() {
             <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial color="orange" />
         </mesh>
+        <Ground />
 
     </>
   );
