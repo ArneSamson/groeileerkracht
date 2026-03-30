@@ -1,10 +1,10 @@
+import { Shadow, SoftShadows } from "@react-three/drei";
 import React from "react";
 
 export default function Lights() {
     return (
         <>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[5, 5, 5]} intensity={1} />
+            <ambientLight intensity={2} />
         </>
     );
 }

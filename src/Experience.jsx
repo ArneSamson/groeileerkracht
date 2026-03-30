@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import CameraHandler from "./helper/CameraHandler.jsx";
-import { CameraControls } from "@react-three/drei";
+import { CameraControls, OrbitControls } from "@react-three/drei";
 
 import Scene from "./components/Scene.jsx";
 import Lights from "./components/lighting/Lights.jsx";
@@ -13,19 +12,17 @@ export default function Experience() {
 
     const { ThreeGlobal } = useThreeGlobal();
 
-    const sceneRef = useRef();
-
 return (
     <>
         <Perf position='top-left' style={{ transform: "translateX(0vw)" }} />
 
-        {/* <CameraHandler /> */}
+        {/* <CameraControls makeDefault /> */}
 
-        <CameraControls makeDefault />
+        <OrbitControls makeDefault />
 
         <Lights />
 
-        <Scene sceneRef={sceneRef} />
+        <Scene/>
 
         <ThreeGlobal />
     </>
