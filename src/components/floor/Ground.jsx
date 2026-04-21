@@ -1,5 +1,6 @@
 import React from "react";
 import { ShadowMaterial } from "three";
+import { RigidBody } from "@react-three/rapier";
 
 export default function Ground() {
   const gridSize = 25; 
@@ -7,15 +8,18 @@ export default function Ground() {
 
   return (
     <>
+    <RigidBody type="fixed" colliders="cuboid">
       <mesh 
         position={[0, 0, 0]}
         rotation={[-Math.PI / 2, 0, 0]}
         receiveShadow={true}
       >
         <planeGeometry args={[100, 100]} />
-        <meshToonMaterial color={'#fdfdfc'}/>
+        <meshToonMaterial color={'#fff'}/>
+        {/* <meshStandardMaterial color={'#ffffff'} /> */}
         
       </mesh>
+    </RigidBody>
 
       {[...Array(gridSize * gridSize)].map((_, i) => {
         const col = i % gridSize;

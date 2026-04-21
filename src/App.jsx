@@ -1,6 +1,7 @@
 import "./style.css";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
+import { Physics } from "@react-three/rapier"
 
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
@@ -37,8 +38,9 @@ function App() {
           shadows={true}
           dpr={window.devicePixelRatio}
         >
-
-          <Experience />
+          <Physics>
+            <Experience />
+          </Physics>
         </Canvas>
 
         {/* <ConfigUi /> */}
