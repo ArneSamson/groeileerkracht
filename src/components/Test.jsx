@@ -36,21 +36,16 @@ export default function Test() {
             cubeRef.current.applyTorqueImpulse(torque, true);
         }
 
-        // Haal de absolute wereldpositie van de kubus op uit Rapier
         const cubePosition = cubeRef.current.translation();
 
-        // Bepaal waar we de camera willen hebben (bijv. 5 eenheden omhoog, 10 eenheden naar achteren)
         const idealCameraPosition = new THREE.Vector3(
             cubePosition.x,
             cubePosition.y + 5,
             cubePosition.z + 10
         );
 
-        // Verplaats de camera soepel naar de ideale positie
-        // De '0.1' is de snelheid: 1 is instant, 0.01 is erg traag en "zweverig"
         state.camera.position.lerp(idealCameraPosition, 0.1);
 
-        // Zorg dat de camera altijd naar de kubus blijft kijken
         const lookAtTarget = new THREE.Vector3(cubePosition.x, cubePosition.y, cubePosition.z);
         state.camera.lookAt(lookAtTarget);
     });
