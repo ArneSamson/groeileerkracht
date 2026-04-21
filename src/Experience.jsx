@@ -18,7 +18,7 @@ return (
 
         {/* <CameraControls makeDefault /> */}
 
-        <OrbitControls makeDefault />
+        {/* <OrbitControls makeDefault /> */}
 
         <Lights />
 
