@@ -25,7 +25,7 @@ export default function Player() {
     useEffect(() => {
         const handleReset = () => {
             if (cubeRef.current) {
-                cubeRef.current.setTranslation({ x: 0, y: 2, z: 10 }, true);
+                cubeRef.current.setTranslation({ x: 0, y: 2, z: 7 }, true);
                 
                 cubeRef.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
                 
@@ -94,7 +94,7 @@ export default function Player() {
             <RigidBody 
                 ref={cubeRef} 
                 colliders="ball" 
-                position={[0, 2, 10]} 
+                position={[0, 2, 7]} 
                 angularDamping={2} 
                 linearDamping={0.8}
             >
