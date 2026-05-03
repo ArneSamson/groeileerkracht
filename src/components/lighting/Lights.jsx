@@ -7,15 +7,15 @@ export default function Lights() {
             <ambientLight intensity={2} />
             <directionalLight
                 castShadow
-                position={[2, 0.5, 5]}
+                position={[2, 2, 2]}
                 intensity={1.5}
-                shadow-mapSize={[1024, 1024]}
+                shadow-mapSize={[2048, 2048]}
                 shadow-camera-near={0.1}
-                shadow-camera-far={10}
-                shadow-camera-top={5}
-                shadow-camera-right={5}
-                shadow-camera-bottom={-4}
-                shadow-camera-left={-5}
+                shadow-camera-far={100}
+                shadow-camera-top={50}
+                shadow-camera-right={50}
+                shadow-camera-bottom={-50}
+                shadow-camera-left={-50}
                 shadow-bias={0.0}
                 shadow-normalBias={0}
             />
