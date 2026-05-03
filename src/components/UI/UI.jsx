@@ -20,7 +20,7 @@ export default function UI() {
                     fontWeight: "bold"
                 }}
             >
-                Reset Positie
+                Reset positie
             </button>
         </div>
     );

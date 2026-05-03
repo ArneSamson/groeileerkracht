@@ -1,48 +1,58 @@
 import React from "react";
-import { ShadowMaterial } from "three";
 import { RigidBody } from "@react-three/rapier";
+import { Instances, Instance } from "@react-three/drei";
 
 export default function Ground() {
-  const gridSize = 75; 
+  const gridSize = 70; 
   const spacing = 4; 
+
+  const positions = [...Array(gridSize * gridSize)].map((_, i) => {
+    const col = i % gridSize;
+    const row = Math.floor(i / gridSize);
+    return {
+      x: (col - gridSize / 2) * spacing,
+      z: (row - gridSize / 2) * spacing
+    };
+  });
 
   return (
     <>
-    <RigidBody type="fixed" colliders="cuboid">
-      <mesh 
-        position={[0, 0, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        receiveShadow={true}
-      >
-        <planeGeometry args={[400, 400]} />
-        <meshToonMaterial color={'#fff'}/>
+      <RigidBody type="fixed" colliders="cuboid">
+        <mesh 
+          position={[0, 0, 0]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          receiveShadow={true}
+        >
+          <planeGeometry args={[100, 100]} />
+          <meshToonMaterial color={'#fff'}/>
+        </mesh>
+      </RigidBody>
+
+      <Instances limit={gridSize * gridSize}>
+        <planeGeometry args={[0.2, 1]} />
+        <meshToonMaterial color="#000002" />
         
-      </mesh>
-    </RigidBody>
+        {positions.map((pos, i) => (
+          <Instance 
+            key={`vert-${i}`} 
+            position={[pos.x, 0.01, pos.z]} 
+            rotation={[-Math.PI / 2, 0, 0]} 
+          />
+        ))}
+      </Instances>
 
-      {[...Array(gridSize * gridSize)].map((_, i) => {
-        const col = i % gridSize;
-        const row = Math.floor(i / gridSize);
+      <Instances limit={gridSize * gridSize}>
+        <planeGeometry args={[1, 0.2]} />
+        <meshToonMaterial color="#000002" />
         
-        const xPos = (col - gridSize / 2) * spacing;
-        const zPos = (row - gridSize / 2) * spacing;
-
-        return (
-          <group key={i} position={[xPos, 0.01, zPos]}>
-            
-            <mesh rotation={[-Math.PI / 2, 0, 0]}>
-              <planeGeometry args={[0.2, 1]} />
-              <meshToonMaterial color="#000002" />
-            </mesh>
-
-            <mesh rotation={[-Math.PI / 2, 0, 0]}>
-              <planeGeometry args={[1, 0.2]} />
-              <meshToonMaterial color="#000002" />
-            </mesh>
-            
-          </group>
-        );
-      })}
+        {positions.map((pos, i) => (
+          <Instance 
+            key={`horiz-${i}`} 
+            position={[pos.x, 0.01, pos.z]} 
+            rotation={[-Math.PI / 2, 0, 0]} 
+          />
+        ))}
+      </Instances>
     </>
   );
 }
