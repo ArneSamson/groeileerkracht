@@ -16,7 +16,6 @@ export default function Ground() {
       >
         <planeGeometry args={[100, 100]} />
         <meshToonMaterial color={'#fff'}/>
-        {/* <meshStandardMaterial color={'#ffffff'} /> */}
         
       </mesh>
     </RigidBody>
