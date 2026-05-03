@@ -30,7 +30,7 @@ export default function Ground() {
 
       <Instances limit={gridSize * gridSize}>
         <planeGeometry args={[0.2, 1]} />
-        <meshToonMaterial color="#000002" />
+        <meshToonMaterial color="#88837f" />
         
         {positions.map((pos, i) => (
           <Instance 
@@ -43,7 +43,7 @@ export default function Ground() {
 
       <Instances limit={gridSize * gridSize}>
         <planeGeometry args={[1, 0.2]} />
-        <meshToonMaterial color="#000002" />
+        <meshToonMaterial color="#88837f" />
         
         {positions.map((pos, i) => (
           <Instance 

@@ -3,6 +3,8 @@ import Ground from "./floor/Ground";
 import Walls from "./floor/Walls";
 import Player from "./Player";
 import { CenterConsole } from "./center/CenterConsole";
+import KwaliteitsPlain from "./kwaliteiten/KwaliteitPlain";
+import UitdagingenPlain from "./uitdagingen/UitdagingenPlain";
 
 export default function Scene() {
 
@@ -14,6 +16,8 @@ export default function Scene() {
         <Ground />
         <Walls />
         <CenterConsole position={[0, 0, 0]} />
+        <KwaliteitsPlain />
+        <UitdagingenPlain />
         <Player />
     </>
   );

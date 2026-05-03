@@ -18,7 +18,7 @@ export default function Lights() {
                 shadow-camera-right={70}
                 shadow-camera-bottom={-70}
                 shadow-camera-left={-70}
-                shadow-bias={-0.0005}
+                shadow-bias={-0.00005}
                 shadow-normalBias={0}
             />
         </>

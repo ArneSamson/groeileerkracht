@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import HolographicMaterial from '../../helper/HolographicMaterial.jsx'
+import { RigidBody } from '@react-three/rapier'
 
 export function CenterConsole(props) {
   const { nodes, materials } = useGLTF('../../../public/models/CenterConsole.glb')
@@ -13,12 +14,14 @@ export function CenterConsole(props) {
   return (
     <>
         <group {...props} dispose={null} scale={scaleMultiplier}>
-        <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Torus.geometry}
-            material={whiteMat}
-        />
+        <RigidBody type="fixed" restitution={0.2} friction={0.7}>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Torus.geometry}
+                material={whiteMat}
+            />
+        </RigidBody>
         <mesh
             castShadow
             receiveShadow
@@ -47,6 +50,23 @@ export function CenterConsole(props) {
             scale={0.036}
         />
         <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Circle.geometry}
+            material={materials['Material.002']}
+            position={[0, 0.094, 0.418]}
+            scale={0.41}
+        />
+        <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Circle001.geometry}
+            material={materials['Material.002']}
+            position={[0.693, 0.094, 0.418]}
+            rotation={[-Math.PI, 0, 0]}
+            scale={-0.41}
+        />
+        <mesh
             position={[0, 1, 0]}
             // material={hologramMaterial}
         >
@@ -54,7 +74,7 @@ export function CenterConsole(props) {
             <HolographicMaterial
                 fresnelAmount={0.2}
                 fresnelOpacity={0.8}
-                hologramBrightness={0.2}
+                hologramBrightness={0.8}
                 scanlineSize={6}
                 signalSpeed={2.3}
                 hologramColor={"#ff5c00"}
@@ -62,12 +82,12 @@ export function CenterConsole(props) {
                 hologramOpacity={0.8}
             />
         </mesh>
-        <mesh
+        {/* <mesh
             position={[0, 0, -2]}
         >
             <boxGeometry args={[2, 2, 0.1]} />
             <meshStandardMaterial color="black" />
-        </mesh>
+        </mesh> */}
         </group>
 
 
