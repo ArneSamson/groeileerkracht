@@ -1,0 +1,76 @@
+import React, { useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
+import { RingGeometry } from 'three'
+import { RigidBody } from '@react-three/rapier'
+
+export function Tandwielen(props) {
+  const { nodes, materials } = useGLTF('/models/Tandwielen.glb')
+  
+  // 1. Maak referenties aan voor elk afzonderlijk tandwiel
+  const gear1Ref = useRef()
+  const gear2Ref = useRef()
+  const gear3Ref = useRef()
+
+  // 2. De animatie-loop
+  useFrame((state, delta) => {
+    // Snelheid instellen (radiaal per seconde)
+    const speed = 1; 
+
+    if (gear1Ref.current && gear2Ref.current && gear3Ref.current) {
+      
+      gear1Ref.current.rotation.z -= speed * delta / 0.75;
+      
+      gear2Ref.current.rotation.z -= speed * delta / 0.75;
+      
+      gear3Ref.current.rotation.z += speed * delta;
+    }
+  })
+
+  return (
+    <group {...props} dispose={null}>
+        <mesh
+
+            rotation={[-Math.PI / 2, 0, 0]}
+            position={[0, -0.69, 0]}
+        >
+            <ringGeometry args={[0.6, 0.8, 32]} />
+            <meshToonMaterial color="#000"/>
+        </mesh>
+        <RigidBody>
+            <mesh
+                position={[0, -0.2, 0]}
+            >
+                <cylinderGeometry args={[0.8, 0.8, 1, 8]} />
+                <meshToonMaterial transparent={true} opacity={0} />
+            </mesh>
+        </RigidBody>
+        <mesh
+            position={[-0.40, -0.1, 0]}
+            ref={gear1Ref}
+            castShadow
+            receiveShadow
+            geometry={nodes.Torus001.geometry}
+            material={nodes.Torus001.material}
+        />
+        <mesh
+            position={[0.30, -0.30, 0]}
+            ref={gear2Ref}
+            castShadow
+            receiveShadow
+            geometry={nodes.Torus003.geometry}
+            material={nodes.Torus003.material}
+        />
+        <mesh
+            ref={gear3Ref}
+            castShadow
+            receiveShadow
+            geometry={nodes.Torus002.geometry}
+            material={nodes.Torus002.material}
+        />
+    </group>
+  )
+}
+
+// Pas het pad hier ook aan naar een absoluut pad vanaf de public folder
+useGLTF.preload('/models/Tandwielen.glb')

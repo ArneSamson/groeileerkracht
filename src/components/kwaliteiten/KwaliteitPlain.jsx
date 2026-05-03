@@ -1,5 +1,6 @@
 import React from "react";
 import { RigidBody } from "@react-three/rapier";
+import { Tandwielen } from "./Tandwielen";
 
 export default function KwaliteitsPlain() {
 
@@ -21,6 +22,8 @@ export default function KwaliteitsPlain() {
     return (
         <>
             <group position={[-35, 0.05, -35]}>
+
+                <Tandwielen position={[-7, 3, -5]} scale={4} rotation={[0, 1, 0]} />
                 
                 <group>
                     <mesh position={[0, 0, -halfSize]}>
