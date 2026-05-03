@@ -48,6 +48,11 @@ export default function Test() {
 
         const lookAtTarget = new THREE.Vector3(cubePosition.x, cubePosition.y, cubePosition.z);
         state.camera.lookAt(lookAtTarget);
+
+        // remove all torques when no keys are pressed to prevent out of control spinning when the keyboard is not touched
+        // if (!keys.arrowup || !keys.arrowdown || !keys.arrowleft || !keys.arrowright) {
+        //     cubeRef.current.setAngularDamping(1); // high damping to quickly stop rotation
+        // }
     });
 
     return (
