@@ -6,6 +6,7 @@ import { Physics } from "@react-three/rapier"
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { Loader } from "./helper/useLoader";
+import UI from "./components/UI/UI.jsx";
 
 import { Leva } from "leva";
 
@@ -26,6 +27,7 @@ function App() {
   return (
     <>
       <div className='root-container'>
+        <UI />
         <Canvas
           className='canvas'
           camera={camSettings}

@@ -23,6 +23,31 @@ export default function Test() {
         };
     }, []);
 
+    useEffect(() => {
+        const handleReset = () => {
+            if (cubeRef.current) {
+                // 1. Verplaats de kubus terug naar de startpositie (X=0, Y=2, Z=0)
+                cubeRef.current.setTranslation({ x: 0, y: 2, z: 0 }, true);
+                
+                // 2. Verwijder alle voorwaartse snelheid (lineaire snelheid naar 0)
+                cubeRef.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
+                
+                // 3. Verwijder alle rotatiesnelheid (stop met tollen)
+                cubeRef.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
+                
+                // 4. Zet de rotatie-hoek weer kaarsrecht
+                cubeRef.current.setRotation({ x: 0, y: 0, z: 0, w: 1 }, true);
+            }
+        };
+
+        // Luister naar het signaal vanuit de UI
+        window.addEventListener('reset-game', handleReset);
+
+        return () => {
+            window.removeEventListener('reset-game', handleReset);
+        };
+    }, []);
+
     // 2. Definieer een onzichtbaar wiskundig vlak op hoogte Y=0 (jouw vloer)
     // useMemo voorkomt dat we dit object 60 keer per seconde opnieuw aanmaken
     const floorPlane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), []);
