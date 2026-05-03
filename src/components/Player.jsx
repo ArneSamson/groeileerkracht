@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 
-export default function Test() {
+export default function Player() {
     const cubeRef = useRef();
 
     const [isPointerDown, setIsPointerDown] = useState(false);
@@ -25,7 +25,7 @@ export default function Test() {
     useEffect(() => {
         const handleReset = () => {
             if (cubeRef.current) {
-                cubeRef.current.setTranslation({ x: 0, y: 2, z: 0 }, true);
+                cubeRef.current.setTranslation({ x: 0, y: 2, z: 10 }, true);
                 
                 cubeRef.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
                 
@@ -94,7 +94,7 @@ export default function Test() {
             <RigidBody 
                 ref={cubeRef} 
                 colliders="ball" 
-                position={[0, 2, 0]} 
+                position={[0, 2, 10]} 
                 angularDamping={2} 
                 linearDamping={0.8}
             >

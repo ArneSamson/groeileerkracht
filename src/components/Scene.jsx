@@ -1,7 +1,7 @@
 import React from "react";
 import Ground from "./floor/Ground";
 import Walls from "./floor/Walls";
-import Test from "./Test";
+import Player from "./Player";
 
 export default function Scene() {
 
@@ -12,7 +12,7 @@ export default function Scene() {
         <fog attach="fog" args={[fogColor, 15, 100]} />
         <Ground />
         <Walls />
-        <Test />
+        <Player />
     </>
   );
 }
