@@ -6,7 +6,7 @@ import * as THREE from "three";
 export default function Test() {
     const cubeRef = useRef();
 
-    const [keys, setKeys] = useState({ z: false, q: false, s: false, d: false });
+    const [keys, setKeys] = useState({ arrowup: false, arrowdown: false, arrowleft: false, arrowright: false });
 
     useEffect(() => {
         const handleKeyDown = (e) => setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));
@@ -27,10 +27,10 @@ export default function Test() {
         const torqueStrength = 0.1; 
         const torque = { x: 0, y: 0, z: 0 };
 
-        if (keys.z) torque.x = -torqueStrength;
-        if (keys.s) torque.x = torqueStrength;
-        if (keys.q) torque.z = torqueStrength;
-        if (keys.d) torque.z = -torqueStrength;
+        if (keys.arrowup) torque.x = -torqueStrength;
+        if (keys.arrowdown) torque.x = torqueStrength;
+        if (keys.arrowleft) torque.z = torqueStrength;
+        if (keys.arrowright) torque.z = -torqueStrength;
 
         if (torque.x !== 0 || torque.z !== 0) {
             cubeRef.current.applyTorqueImpulse(torque, true);
