@@ -52,27 +52,23 @@ export default function Walls() {
 
             <group position={[0, 0.05, 0]}>
                 
-                {/* Noord lijn */}
                 <mesh position={[0, 0, -halfSize]}>
-                    <boxGeometry args={[planeSize, 0.1, lineWidth]} />
+                    <boxGeometry args={[planeSize+0.5, 0.1, lineWidth]} />
                     {neonMaterial}
                 </mesh>
                 
-                {/* Zuid lijn */}
                 <mesh position={[0, 0, halfSize]}>
-                    <boxGeometry args={[planeSize, 0.1, lineWidth]} />
+                    <boxGeometry args={[planeSize+0.5, 0.1, lineWidth]} />
                     {neonMaterial}
                 </mesh>
                 
-                {/* Oost lijn */}
                 <mesh position={[halfSize, 0, 0]}>
-                    <boxGeometry args={[lineWidth, 0.1, planeSize]} />
+                    <boxGeometry args={[lineWidth, 0.1, planeSize+0.5]} />
                     {neonMaterial}
                 </mesh>
                 
-                {/* West lijn */}
                 <mesh position={[-halfSize, 0, 0]}>
-                    <boxGeometry args={[lineWidth, 0.1, planeSize]} />
+                    <boxGeometry args={[lineWidth, 0.1, planeSize+0.5]} />
                     {neonMaterial}
                 </mesh>
 
