@@ -3,7 +3,7 @@ import { ShadowMaterial } from "three";
 import { RigidBody } from "@react-three/rapier";
 
 export default function Ground() {
-  const gridSize = 25; 
+  const gridSize = 75; 
   const spacing = 4; 
 
   return (
@@ -14,7 +14,7 @@ export default function Ground() {
         rotation={[-Math.PI / 2, 0, 0]}
         receiveShadow={true}
       >
-        <planeGeometry args={[100, 100]} />
+        <planeGeometry args={[400, 400]} />
         <meshToonMaterial color={'#fff'}/>
         
       </mesh>

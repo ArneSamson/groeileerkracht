@@ -47,8 +47,8 @@ export default function Test() {
 
         const idealCameraPosition = new THREE.Vector3(
             cubePosition.x,
-            cubePosition.y + 5,
-            cubePosition.z + 10
+            cubePosition.y + 10,
+            cubePosition.z + 20
         );
 
         state.camera.position.lerp(idealCameraPosition, 0.1);
@@ -73,7 +73,7 @@ export default function Test() {
             >
                 <mesh castShadow>
                     <boxGeometry args={[1, 1, 1]} />
-                    <meshToonMaterial color="red" />
+                    <meshToonMaterial color="#ff5c00" />
                 </mesh>
             </RigidBody>
         </>
