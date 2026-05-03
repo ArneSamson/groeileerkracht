@@ -7,6 +7,7 @@ import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { Loader } from "./helper/useLoader";
 import UI from "./components/UI/UI.jsx";
+import OverlayKwaliteiten from "./components/UI/OverlayKwaliteiten.jsx";
 
 import { Leva } from "leva";
 
@@ -28,6 +29,7 @@ function App() {
     <>
       <div className='root-container'>
         <UI />
+        <OverlayKwaliteiten />
         <Canvas
           className='canvas'
           camera={camSettings}

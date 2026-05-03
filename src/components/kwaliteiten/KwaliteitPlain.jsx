@@ -1,18 +1,26 @@
 import React from "react";
-import { RigidBody } from "@react-three/rapier";
+import { useState } from "react";
+import { RigidBody, CuboidCollider } from "@react-three/rapier";
 import { Tandwielen } from "./Tandwielen";
 
 export default function KwaliteitsPlain() {
 
+    const [isPlayerInside, setIsPlayerInside] = useState(false);
+
     const plainsize = 25;
     const halfSize = plainsize / 2;
-
     const lineWidth = 0.5;
+
+    const defaultColor = "#000000";
+    const defaultEmissive = "#000000";
+
+    const activeColor = "#00ffff"; 
+    const activeEmissive = "#00ffff";
 
     const neonMaterial = (
         <meshStandardMaterial 
-            color="#ff5c00" 
-            emissive="#692700" 
+            color={isPlayerInside ? activeColor : defaultColor} 
+            emissive={isPlayerInside ? activeEmissive : defaultEmissive} 
             emissiveIntensity={2.5} 
             toneMapped={false} 
         />
@@ -24,7 +32,25 @@ export default function KwaliteitsPlain() {
             <group position={[-35, 0.05, -35]}>
 
                 <Tandwielen position={[-7, 3, -5]} scale={4} rotation={[0, 1, 0]} />
-                
+
+                <CuboidCollider 
+                    position={[0, 5, 0]} 
+                    args={[halfSize, 5, halfSize]} 
+                    sensor 
+                    onIntersectionEnter={({ other }) => {
+                        if (other.rigidBodyObject && other.rigidBodyObject.name === "player") {
+                            console.log("Player entered the plain");
+                            setIsPlayerInside(true);
+                        }
+                    }}
+                    onIntersectionExit={({ other }) => {
+                        if (other.rigidBodyObject && other.rigidBodyObject.name === "player") {
+                            console.log("Player exited the plain");
+                            setIsPlayerInside(false);
+                        }
+                    }}
+                />
+
                 <group>
                     <mesh position={[0, 0, -halfSize]}>
                         <boxGeometry args={[plainsize + 0.5, 0.1, lineWidth]} />

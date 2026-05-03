@@ -7,14 +7,11 @@ import { RigidBody } from '@react-three/rapier'
 export function Tandwielen(props) {
   const { nodes, materials } = useGLTF('/models/Tandwielen.glb')
   
-  // 1. Maak referenties aan voor elk afzonderlijk tandwiel
   const gear1Ref = useRef()
   const gear2Ref = useRef()
   const gear3Ref = useRef()
 
-  // 2. De animatie-loop
   useFrame((state, delta) => {
-    // Snelheid instellen (radiaal per seconde)
     const speed = 1; 
 
     if (gear1Ref.current && gear2Ref.current && gear3Ref.current) {
@@ -27,8 +24,20 @@ export function Tandwielen(props) {
     }
   })
 
+  const handlePointerOver = () => (document.body.style.cursor = 'pointer')
+  const handlePointerOut = () => (document.body.style.cursor = 'auto')
+
   return (
-    <group {...props} dispose={null}>
+    <group
+        {...props}
+        dispose={null}
+        onClick={(e) => {
+            e.stopPropagation(); 
+            window.dispatchEvent(new CustomEvent('open-overlay')); 
+        }}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+    >
         <mesh
 
             rotation={[-Math.PI / 2, 0, 0]}

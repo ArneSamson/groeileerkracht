@@ -92,6 +92,7 @@ export default function Player() {
     return (
         <>
             <RigidBody 
+                name="player"
                 ref={cubeRef} 
                 colliders="ball" 
                 position={[0, 2, 7]} 
