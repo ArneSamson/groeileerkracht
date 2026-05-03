@@ -3,6 +3,8 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { RingGeometry } from 'three'
 import { RigidBody } from '@react-three/rapier'
+import { useShallow } from 'zustand/shallow'
+import useStore from "../../store/useScene";
 
 export function Tandwielen(props) {
   const { nodes, materials } = useGLTF('/models/Tandwielen.glb')
@@ -24,17 +26,28 @@ export function Tandwielen(props) {
     }
   })
 
-  const handlePointerOver = () => (document.body.style.cursor = 'pointer')
+  const enteredKwaliteitenPlain = useStore(
+    useShallow((state) => state.enteredKwaliteitenPlain)
+  )
+
+  const handlePointerOver = () => {
+    if (!enteredKwaliteitenPlain) return
+    (document.body.style.cursor = 'pointer')
+  } 
   const handlePointerOut = () => (document.body.style.cursor = 'auto')
+
+  const handleClick = (e) => {
+    if (!enteredKwaliteitenPlain) return;
+
+    e.stopPropagation(); 
+    window.dispatchEvent(new CustomEvent('open-overlay')); 
+  }
 
   return (
     <group
         {...props}
         dispose={null}
-        onClick={(e) => {
-            e.stopPropagation(); 
-            window.dispatchEvent(new CustomEvent('open-overlay')); 
-        }}
+        onClick={handleClick}
         onPointerOver={handlePointerOver}
         onPointerOut={handlePointerOut}
     >

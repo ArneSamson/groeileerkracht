@@ -2,10 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { RigidBody, CuboidCollider } from "@react-three/rapier";
 import { Tandwielen } from "./Tandwielen";
+import useStore from "../../store/useScene";
 
 export default function KwaliteitsPlain() {
 
-    const [isPlayerInside, setIsPlayerInside] = useState(false);
+    const isPlayerInside = useStore((state) => state.enteredKwaliteitenPlain);
+    const setIsPlayerInside = useStore((state) => state.setEnteredKwaliteitenPlain);
 
     const plainsize = 25;
     const halfSize = plainsize / 2;
