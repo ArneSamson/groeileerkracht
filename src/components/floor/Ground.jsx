@@ -1,6 +1,7 @@
 import React from "react";
 import { RigidBody } from "@react-three/rapier";
 import { Instances, Instance } from "@react-three/drei";
+import WavyCable from "./Cable";
 
 export default function Ground() {
   const gridSize = 70; 
@@ -17,6 +18,23 @@ export default function Ground() {
 
   return (
     <>
+      <WavyCable 
+          start={[-3.3, 0, -10.05]} 
+          end={[-23, 0, -21]} 
+          color="#000"
+          amplitude={1.5}
+          frequency={-0.9}
+          radius={0.3}
+      />
+      <WavyCable 
+          start={[4.8, 0, -8.75]} 
+          end={[23, 0, -21]} 
+          color="#000"
+          amplitude={1.5}
+          frequency={1.75}
+          radius={0.3}
+      />
+
       <RigidBody type="fixed" colliders="cuboid">
         <mesh 
           position={[0, 0, 0]}
