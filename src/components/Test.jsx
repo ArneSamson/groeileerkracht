@@ -27,10 +27,17 @@ export default function Test() {
         const torqueStrength = 0.1; 
         const torque = { x: 0, y: 0, z: 0 };
 
-        if (keys.arrowup) torque.x = -torqueStrength;
-        if (keys.arrowdown) torque.x = torqueStrength;
-        if (keys.arrowleft) torque.z = torqueStrength;
-        if (keys.arrowright) torque.z = -torqueStrength;
+        if (keys.arrowup) {
+            torque.x = -torqueStrength;
+        } else if (keys.arrowdown) {
+            torque.x = torqueStrength;
+        } else if (keys.arrowleft) {
+            torque.z = torqueStrength;
+        } else if (keys.arrowright) {
+            torque.z = -torqueStrength;
+        } else {
+            cubeRef.current.setAngularDamping(1); // high damping to quickly stop rotation when no keys are pressed
+        }
 
         if (torque.x !== 0 || torque.z !== 0) {
             cubeRef.current.applyTorqueImpulse(torque, true);
