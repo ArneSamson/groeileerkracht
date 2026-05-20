@@ -2,11 +2,14 @@ import React, { useRef, useState, useEffect, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
+import useStore from "../store/useScene";
 
 export default function Player() {
     const cubeRef = useRef();
 
     const [isPointerDown, setIsPointerDown] = useState(false);
+
+    const isOverlayOpen = useStore((state) => state.isOverlayOpen);
 
     useEffect(() => {
         // We gebruiken pointer events, dit werkt direct voor zowel muis als touchscreens
@@ -48,6 +51,8 @@ export default function Player() {
         if (!cubeRef.current) return;
 
         const cubePosition = cubeRef.current.translation();
+
+        if(isOverlayOpen) return;
 
         if (isPointerDown) {
             const targetPoint = new THREE.Vector3();

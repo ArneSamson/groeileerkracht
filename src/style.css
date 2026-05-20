@@ -879,3 +879,56 @@ summary span {
     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   }
 }
+
+.groeiverslag-html-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.competentie-card {
+  background: #fdfdfd;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: #f5f5f5;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.fase-block {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.fase-block:last-child {
+  border-bottom: none;
+  background: #f9fbfd; /* Geeft de 'Einde' fase een subtiel accent */
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-verplicht { background: #e3f2fd; color: #0d47a1; }
+.status-remedieren { background: #ffebee; color: #c62828; }
+.status-excelleren { background: #e8f5e9; color: #2e7d32; }
+
+.besluit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}

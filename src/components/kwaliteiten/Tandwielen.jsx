@@ -13,7 +13,14 @@ export function Tandwielen(props) {
   const gear2Ref = useRef()
   const gear3Ref = useRef()
 
+  const enteredKwaliteitenPlain = useStore(useShallow((state) => state.enteredKwaliteitenPlain))
+  const isOverlayOpen = useStore(useShallow((state) => state.isOverlayOpen));
+  const setIsOverlayOpen = useStore(useShallow((state) => state.setIsOverlayOpen));
+
   useFrame((state, delta) => {
+
+    if (isOverlayOpen) return;
+
     const speed = 1; 
 
     if (gear1Ref.current && gear2Ref.current && gear3Ref.current) {
@@ -26,9 +33,7 @@ export function Tandwielen(props) {
     }
   })
 
-  const enteredKwaliteitenPlain = useStore(
-    useShallow((state) => state.enteredKwaliteitenPlain)
-  )
+
 
   const handlePointerOver = () => {
     if (!enteredKwaliteitenPlain) return
@@ -40,7 +45,8 @@ export function Tandwielen(props) {
     if (!enteredKwaliteitenPlain) return;
 
     e.stopPropagation(); 
-    window.dispatchEvent(new CustomEvent('open-overlay')); 
+    setIsOverlayOpen(true);
+    // window.dispatchEvent(new CustomEvent('open-overlay')); 
   }
 
   return (

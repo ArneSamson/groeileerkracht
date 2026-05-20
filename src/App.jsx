@@ -8,12 +8,16 @@ import { Canvas } from "@react-three/fiber";
 import { Loader } from "./helper/useLoader";
 import UI from "./components/UI/UI.jsx";
 import OverlayKwaliteiten from "./components/UI/OverlayKwaliteiten.jsx";
+import TwoDimensional from "./components/2D/TwoDimensional.jsx";
+
+import useScene from "./store/useScene.jsx";
 
 import { Leva } from "leva";
 
 import Experience from "./Experience.jsx";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
+
 
 
 const camSettings = {
@@ -25,27 +29,39 @@ const camSettings = {
 };
 
 function App() {
+
+  // use viewMode state from store to conditionally render either 3D scene or 2D content
+  const viewMode = useScene((state) => state.viewMode);
+
   return (
     <>
       <div className='root-container'>
-        <UI />
-        <OverlayKwaliteiten />
-        <Canvas
-          className='canvas'
-          camera={camSettings}
-          gl={{
-            antialias: true,
-            outputColorSpace: THREE.SRGBColorSpace,
-            toneMappingExposure: 1,
-            alpha: true,
-          }}
-          shadows={true}
-          dpr={window.devicePixelRatio}
-        >
-          <Physics>
-            <Experience />
-          </Physics>
-        </Canvas>
+
+
+        {viewMode === "3d" && (<>
+          <UI />
+          <OverlayKwaliteiten />
+            <Canvas
+              className='canvas'
+              camera={camSettings}
+              gl={{
+                antialias: true,
+                outputColorSpace: THREE.SRGBColorSpace,
+                toneMappingExposure: 1,
+                alpha: true,
+              }}
+              shadows={true}
+            dpr={window.devicePixelRatio}
+          >
+            <Physics>
+              <Experience />
+            </Physics>
+          </Canvas> 
+        </>)}
+
+        {viewMode === "2d" && (
+          <TwoDimensional />
+        )}
 
         {/* <ConfigUi /> */}
 

@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
+import useStore from "../../store/useScene";
 
 export default function OverlayKwaliteiten() {
-    // State om bij te houden of de overlay open of dicht is
-    const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => {
-        // Luister naar het signaal uit de 3D wereld
-        const openOverlay = () => setIsOpen(true);
-        window.addEventListener('open-overlay', openOverlay);
-
-        return () => {
-            window.removeEventListener('open-overlay', openOverlay);
-        };
-    }, []);
+    const isOpen = useStore((state) => state.isOverlayOpen);
+    const setIsOverlayOpen = useStore((state) => state.setIsOverlayOpen);
 
     // Als de overlay niet open is, render dan helemaal niets (null)
     if (!isOpen) return null;
@@ -57,7 +49,7 @@ export default function OverlayKwaliteiten() {
                 {/* Voeg hier gerust afbeeldingen of meer tekst toe voor je leerlingen */}
 
                 <button 
-                    onClick={() => setIsOpen(false)} // Sluit de pop-up
+                    onClick={() => setIsOverlayOpen(false)} // Sluit de pop-up
                     style={{
                         marginTop: "20px",
                         padding: "10px 20px",
