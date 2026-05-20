@@ -1,6 +1,10 @@
 import React from "react";
+import useScene from "../../store/useScene";
 
 export default function TwoDimensional() {
+  const viewMode = useScene((state) => state.viewMode);
+  const setViewMode = useScene((state) => state.setViewMode);
+
   return (
     <div className="groeiverslag-html-container">
       <header className="groeiverslag-header">
@@ -8,7 +12,27 @@ export default function TwoDimensional() {
         <p className="groeiverslag-sub">
           Traject: Verkorte Educatieve Bachelor Secundair Onderwijs | Stageschool: BA Pitzemburg
         </p>
+
+        <button
+          onClick={
+            () => setViewMode(viewMode === "3d" ? "2d" : "3d")
+          }
+          style={{  
+            padding: "10px 20px",
+            fontSize: "16px",
+            cursor: "pointer",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            fontWeight: "bold"
+          }
+        }
+        >
+          Schakel naar 3D
+        </button>
       </header>
+
 
       {/* SECTIE 1: DEELCOMPETENTIES */}
       <section className="groeiverslag-section">

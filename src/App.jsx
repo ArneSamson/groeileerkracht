@@ -33,6 +33,27 @@ function App() {
   // use viewMode state from store to conditionally render either 3D scene or 2D content
   const viewMode = useScene((state) => state.viewMode);
 
+  const containerStyles = {
+    zIndex: 4,
+    backgroundColor: "#fafafa",
+  };
+  const barStyles = {
+    backgroundColor: "#000000",
+  };
+  const dataStyles = {
+    color: "#272727",
+    fontSize: "16px",
+    lineHeight: "30px",
+    fontWeight: 400,
+  };
+  const innerStyles = {
+    width: "200px",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    gap: "20px",
+  };
+
   return (
     <>
       <div className='root-container'>
@@ -69,6 +90,16 @@ function App() {
         // collapsed
         //   hidden
         />
+
+        <Loader
+          containerStyles={containerStyles}
+          barStyles={barStyles}
+          dataStyles={dataStyles}
+          innerStyles={innerStyles}
+          dataInterpolation={(p) => `Loading scene: ${p.toFixed(2)}%`}
+          // gifSrc={"/images/GIF/.gif"}
+        />
+
       </div>
     </>
   );
