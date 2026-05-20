@@ -62,6 +62,7 @@ function App() {
         onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
         style={{
           position: "absolute",
+          zIndex: 999,
           top: 20,
           right: 20,
           padding: "10px 20px",

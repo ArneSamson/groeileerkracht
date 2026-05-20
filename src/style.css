@@ -881,7 +881,7 @@ summary span {
 }
 
 .card-container{
-  margin-top: 48px;
+  margin-top: 40px;
 }
 
 /* --- FIX VOOR 2D WEERGAVE & UI STYLING --- */
@@ -919,6 +919,10 @@ summary span {
 .groeiverslag-html-container::-webkit-scrollbar-thumb {
   background-color: var(--neutral-500);
   border-radius: 10px;
+}
+
+.groeiverslag-section{
+  margin-top: 48px;;
 }
 
 .competentie-card {
