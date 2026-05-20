@@ -14,7 +14,7 @@ export default function UI() {
     };
 
     return (
-        <div style={{ position: "absolute", top: 20, right: 20, zIndex: 10, display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div style={{ position: "absolute", top: 80, right: 20, zIndex: 10, display: "flex", flexDirection: "column", gap: "10px" }}>
             <button 
                 onClick={triggerReset}
                 style={{
@@ -25,25 +25,12 @@ export default function UI() {
                     color: "white",
                     border: "none",
                     borderRadius: "5px",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
+                    height: "38px",
+                    width: "200px",
                 }}
             >
                 Reset positie
-            </button>
-            <button
-                onClick={toggleViewMode}
-                style={{
-                    padding: "10px 20px",
-                    fontSize: "16px",
-                    cursor: "pointer",
-                    backgroundColor: "#007bff",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "5px",
-                    fontWeight: "bold"
-                }}
-            >
-                {viewMode === "3d" ? "Bekijk 2D Uitleg" : "Bekijk 3D Scene"}
             </button>
         </div>
     );

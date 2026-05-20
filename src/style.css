@@ -24,9 +24,9 @@ body,
   --neutral-100: #fdfdfc;
   --primary-500: #ff5c00;
 
-  --heading-family: "Inter, sans-serif";
-  --subheading-family: "Inter, sans-serif";
-  --body-family: "Inter, sans-serif";
+  --heading-family: "Inter", sans-serif;
+  --subheading-family: "Inter", sans-serif;
+  --body-family: "Inter", sans-serif;
 
   --heading1-size: 70px;
   --heading1-line-height: 80px;
@@ -53,7 +53,7 @@ body,
   --mini-title-size: 18px;
 
   --body-size: 16px;
-  --body-line-height: 16px;
+  --body-line-height: 24px;
   --body-weight: 400;
 
   --link-size: 18px;
@@ -880,47 +880,89 @@ summary span {
   }
 }
 
+.card-container{
+  margin-top: 48px;
+}
+
+/* --- FIX VOOR 2D WEERGAVE & UI STYLING --- */
 .groeiverslag-html-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  font-family: 'Arial', sans-serif;
-  color: #333;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 50px;
+  
+  /* UI Styling overgenomen van je andere panelen */
+  background: rgba(253, 253, 252, 0.85); /* Gebaseerd op var(--neutral-100) met transparantie */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 40px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  
+  font-family: var(--body-family);
+  color: var(--neutral-1000);
   line-height: 1.6;
+  
+  /* Essentieel om te kunnen scrollen in je vaste 3D root */
+  height: calc(100vh - 80px); 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+/* Subtiele scrollbar in de UI stijl */
+.groeiverslag-html-container::-webkit-scrollbar {
+  width: 6px;
+}
+.groeiverslag-html-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.groeiverslag-html-container::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-500);
+  border-radius: 10px;
 }
 
 .competentie-card {
-  background: #fdfdfd;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--neutral-500);
+  border-radius: 30px; /* Dezelfde afronding als je buttons en selectievlakken */
   margin-bottom: 30px;
   overflow: hidden;
 }
 
 .card-header {
-  background: #f5f5f5;
-  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 20px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--neutral-500);
+}
+
+.card-header h3 {
+  color: var(--neutral-1000);
+  margin-bottom: 0;
 }
 
 .fase-block {
-  padding: 20px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .fase-block:last-child {
   border-bottom: none;
-  background: #f9fbfd; /* Geeft de 'Einde' fase een subtiel accent */
+  background: rgba(0, 0, 0, 0.02); 
+}
+
+.fase-block h4 {
+  margin-bottom: 10px;
 }
 
 .badge {
-  padding: 4px 10px;
-  border-radius: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: var(--button-weight);
+  font-family: var(--subheading-family);
 }
 
 .status-verplicht { background: #e3f2fd; color: #0d47a1; }
@@ -931,4 +973,48 @@ summary span {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  margin-top: 20px;
+}
+
+.besluit-card {
+  border: 1px solid var(--neutral-500);
+  border-radius: 30px;
+  padding: 25px;
+  background: transparent;
+}
+
+.besluit-card h3 {
+  color: var(--neutral-1000);
+  margin-bottom: 15px;
+  font-size: var(--mini-title-size);
+}
+
+.besluit-card ul {
+  padding-left: 20px;
+}
+
+.besluit-card li {
+  margin-bottom: 15px;
+}
+
+/* Responsiviteit voor kleinere schermen */
+@media (max-width: 1000px) {
+  .groeiverslag-html-container {
+    margin: 20px;
+    padding: 30px;
+    height: calc(100vh - 40px);
+    border-radius: 25px;
+  }
+  
+  .besluit-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ict-link {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: rgba(255, 92, 0, 0.05); /* Lichte tint van je primary color */
+  border-left: 4px solid var(--primary-500);
+  border-radius: 0 8px 8px 0;
 }

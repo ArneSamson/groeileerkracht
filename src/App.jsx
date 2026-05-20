@@ -30,9 +30,6 @@ const camSettings = {
 
 function App() {
 
-  // use viewMode state from store to conditionally render either 3D scene or 2D content
-  const viewMode = useScene((state) => state.viewMode);
-
   const containerStyles = {
     zIndex: 4,
     backgroundColor: "#fafafa",
@@ -54,9 +51,34 @@ function App() {
     gap: "20px",
   };
 
+  const setViewMode = useScene((state) => state.setViewMode);
+  const viewMode = useScene((state) => state.viewMode);
+
   return (
     <>
       <div className='root-container'>
+
+      <button
+        onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
+        style={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          padding: "10px 20px",
+          fontSize: "16px",
+          cursor: "pointer",
+          backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          fontWeight: "bold",
+          zIndex: 10,
+          width: "200px",
+          height: "38px",
+        }}
+      >
+          {viewMode === "3d" ? "Bekijk 2D uitleg" : "Bekijk 3D scene"}
+      </button>
 
 
         {viewMode === "3d" && (<>
