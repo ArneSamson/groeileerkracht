@@ -73,7 +73,6 @@ function App() {
           border: "none",
           borderRadius: "5px",
           fontWeight: "bold",
-          zIndex: 10,
           width: "200px",
           height: "38px",
         }}

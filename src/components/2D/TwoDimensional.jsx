@@ -102,7 +102,7 @@ const kwaliteiten = [
     <div className="groeiverslag-html-container">
 
       <header className="groeiverslag-header">
-        <h1>Mijn Groeileerkracht — Profileringsstage</h1>
+        <h1>Groeileerkracht - Profileringsstage</h1>
         <p className="groeiverslag-sub">
           Traject: Verkorte Educatieve Bachelor | Inzichten uit praktijk, groei en ICT-beleid
         </p>
