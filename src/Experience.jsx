@@ -22,11 +22,15 @@ return (
 
         {/* <OrbitControls makeDefault /> */}
 
-        <EffectComposer>
+        <EffectComposer
+            multisampling={0} // Zet multisampling uit voor scherpere bloom
+            disableNormalPass={true} // Normaal niet nodig voor bloom, kan uit voor betere prestaties
+        >
             <Bloom 
                 luminanceThreshold={1} // Zorgt dat enkel objecten met emissiveIntensity > 1 een gloed krijgen
-                mipmapBlur={true}      // Maakt de gloed veel zachter en realistischer
+                mipmapBlur={false}      // Maakt de gloed veel zachter en realistischer
                 intensity={1.5}        // Sterkte van het halo-effect
+                resolutionScale={0.5}      // Houdt de resolutie van de gloed gelijk aan die van de hoofdscene
             />
         </EffectComposer>
 
