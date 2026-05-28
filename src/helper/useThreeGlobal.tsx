@@ -1,5 +1,5 @@
 import { RootState, useThree } from "@react-three/fiber";
-import { getThreeValue, setThreeValue, subscribe } from "./Globals";
+import { getThreeValue, setThreeValue, subscribe } from "./Globals.ts";
 import { useEffect, useState } from "react";
 
 export function useThreeGlobal(): { three: RootState | undefined; ThreeGlobal: typeof ThreeGlobal } {
