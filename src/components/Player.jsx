@@ -47,6 +47,11 @@ export default function Player() {
 
     const floorPlane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), []);
 
+    const targetPoint = new THREE.Vector3();
+    const cubeVec = new THREE.Vector3();
+    const up = new THREE.Vector3(0, 1, 0);
+    const lookAtTarget = new THREE.Vector3(0, 0, 0);
+
     useFrame((state, delta) => {
         if (!cubeRef.current) return;
 
@@ -54,13 +59,13 @@ export default function Player() {
 
         if(isOverlayOpen) return;
 
-        if (isPointerDown) {
-            const targetPoint = new THREE.Vector3();
+        if (isPointerDown) {            
             state.raycaster.setFromCamera(state.pointer, state.camera);
             state.raycaster.ray.intersectPlane(floorPlane, targetPoint);
 
             if (targetPoint) {
-                const cubeVec = new THREE.Vector3(cubePosition.x, cubePosition.y, cubePosition.z);
+                // const cubeVec = new THREE.Vector3(cubePosition.x, cubePosition.y, cubePosition.z);
+                cubeVec.set(cubePosition.x, cubePosition.y, cubePosition.z);
                 const direction = targetPoint.clone().sub(cubeVec);
                 
                 direction.y = 0;
@@ -68,7 +73,8 @@ export default function Player() {
                 if (direction.length() > 0.5) {
                     direction.normalize(); 
 
-                    const up = new THREE.Vector3(0, 1, 0);
+                    // const up = new THREE.Vector3(0, 1, 0);
+
                     const torqueAxis = up.clone().cross(direction).normalize();
 
                     const torqueStrength = 2;
@@ -90,7 +96,9 @@ export default function Player() {
 
         state.camera.position.lerp(idealCameraPosition, 1 - Math.exp(-5 * delta));
         
-        const lookAtTarget = new THREE.Vector3(cubePosition.x, cubePosition.y, cubePosition.z);
+        // const lookAtTarget = new THREE.Vector3(cubePosition.x, cubePosition.y, cubePosition.z);
+        lookAtTarget.set(cubePosition.x, cubePosition.y, cubePosition.z);
+
         state.camera.lookAt(lookAtTarget);
     });
 

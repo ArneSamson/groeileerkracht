@@ -12,10 +12,22 @@ export function Laptop(props) {
   const enteredKwaliteitenPlain = useStore(
     useShallow((state) => state.enteredKwaliteitenPlain)
   )
+  
+  // Haal setOverlayData uit de store
+  const setOverlayData = useStore(useShallow((state) => state.setOverlayData));
+
+  // De specifieke data voor dit object (Kwaliteit 2)
+  const laptopData = {
+      titel: "2. Doelgerichte media-integratie en AI-bewustzijn",
+      dlr: "Begeleider van leer- en ontwikkelingsprocessen",
+      praktijk: "Ik zet technologie en media uiterst doelgericht in om leerstof te verankeren, maar ik ben me evengoed bewust van de valkuilen, zoals generatieve AI. In mijn informaticalessen leer ik leerlingen enerzijds hoe ze AI als tool kunnen gebruiken, maar waak ik er anderzijds streng over dat het hun eigen denkproces niet vervangt. Ik houd gericht toezicht op de laptops en heb het snel door wanneer leerlingen AI als sluipweg gebruiken, bijvoorbeeld wanneer ze plots programmeeropdrachten indienen met code of syntax die we in de les nog nooit gezien hebben.",
+      beleidLink: "Tijdens het uitschrijven van het ICT-beleid nam ik de snelle, digitale optimalisaties uit handen van de directie. Hierdoor kregen Jeroen en Steven de mentale ruimte om zich te focussen op de strategische aanpak rond AI en evaluatiemethodes. Doordat ik razendsnel overweg kan met de nieuwste software, fungerde ik als de brug tussen de beleidsvisie op technologie en de praktische uitvoering ervan.",
+      groeiVisie: "Technologie geeft me de vrijheid om te schakelen, maar vraagt ook om waakzaamheid. Media en AI zijn voor mij geen doelen op zich, maar hulpmiddelen. Ik blijf mezelf trainen in het herkennen van digitaal misbruik, zodat technologie het leerproces ondersteunt en niet ondermijnt."
+    };
 
   const handlePointerOver = () => {
     if (!enteredKwaliteitenPlain) return
-    (document.body.style.cursor = 'pointer')
+    document.body.style.cursor = 'pointer'
   } 
   const handlePointerOut = () => (document.body.style.cursor = 'auto')
 
@@ -23,7 +35,8 @@ export function Laptop(props) {
     if (!enteredKwaliteitenPlain) return;
 
     e.stopPropagation(); 
-    // window.dispatchEvent(new CustomEvent('open-overlay')); 
+    // Open de overlay en geef de data van de laptop mee
+    setOverlayData(laptopData);
   }
 
   return (
@@ -34,7 +47,6 @@ export function Laptop(props) {
       onPointerOver={handlePointerOver}
       onPointerOut={handlePointerOut}>
       <mesh
-
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -0.3, 0]}
       >

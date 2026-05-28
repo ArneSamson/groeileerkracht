@@ -39,6 +39,7 @@ export default function KwaliteitsPlain() {
                 <Laptop position={[7, 1, -5]} scale={3} rotation={[0, 0, 0]} />
 
                 <CuboidCollider 
+                    type="fixed"
                     position={[0, 5, 0]} 
                     args={[halfSize, 5, halfSize]} 
                     sensor 

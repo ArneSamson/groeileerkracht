@@ -1,72 +1,69 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useStore from "../../store/useScene";
 
 export default function OverlayKwaliteiten() {
-
     const isOpen = useStore((state) => state.isOverlayOpen);
     const setIsOverlayOpen = useStore((state) => state.setIsOverlayOpen);
+    const data = useStore((state) => state.overlayData); // Haal de data op uit de store
 
-    // Als de overlay niet open is, render dan helemaal niets (null)
-    if (!isOpen) return null;
+    // Als hij niet open is OF er is geen data, render niets
+    if (!isOpen || !data) return null;
 
     return (
-        // De half-transparante achtergrond die het hele scherm vult
         <div style={{
             position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.6)", // 60% zwart, dus je ziet de game er nog door!
-            zIndex: 9999, // Zorgt dat dit overal bovenop ligt
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backdropFilter: "blur(3px)" // Optioneel: maakt de game op de achtergrond een beetje wazig
+            top: 0, left: 0, width: "100vw", height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            zIndex: 9999, display: "flex", justifyContent: "center",
+            alignItems: "center", backdropFilter: "blur(5px)" 
         }}>
-            
-            {/* De effectieve "Webpagina" in het midden */}
             <div style={{
-                backgroundColor: "#fdfdfc",
-                padding: "40px",
-                borderRadius: "12px",
-                maxWidth: "600px",
-                width: "90%",
-                boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
-                fontFamily: "sans-serif",
-                color: "#333",
-                maxHeight: "80vh", // Voorkomt dat de pagina buiten het scherm valt
-                overflowY: "auto"  // Maakt de tekst scrollbaar als het te lang wordt
+                backgroundColor: "#fdfdfc", padding: "40px", borderRadius: "30px",
+                maxWidth: "700px", width: "90%", boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+                fontFamily: "var(--body-family, sans-serif)", color: "#333",
+                maxHeight: "85vh", overflowY: "auto", position: "relative"
             }}>
-                <h1 style={{ marginTop: 0 }}>De werking van Tandwielen</h1>
-                <p>
-                    Tandwielen zijn getande wielen die beweging en kracht overbrengen. 
-                    Wanneer het eerste tandwiel (het aandrijvende wiel) draait, 
-                    zorgen de tanden ervoor dat het volgende wiel in de tegengestelde 
-                    richting begint te draaien.
-                </p>
+                {/* Dynamische Inhoud */}
+                <h2 style={{ marginTop: 0, marginBottom: "10px", color: "var(--neutral-1000)" }}>
+                    {data.titel}
+                </h2>
                 
-                {/* Voeg hier gerust afbeeldingen of meer tekst toe voor je leerlingen */}
+                <span style={{ 
+                    display: "inline-block", padding: "6px 12px", borderRadius: "20px", 
+                    fontSize: "12px", fontWeight: "bold", backgroundColor: "#e8f5e9", 
+                    color: "#2e7d32", marginBottom: "25px" 
+                }}>
+                    DLR: {data.dlr}
+                </span>
+
+                <h4 style={{ marginBottom: "10px" }}>In de klas:</h4>
+                <p style={{ marginBottom: "20px", lineHeight: "1.6" }}>{data.praktijk}</p>
+
+                <h4 style={{ marginBottom: "10px" }}>De link met het beleid:</h4>
+                <p style={{ marginBottom: "20px", lineHeight: "1.6" }}>{data.beleidLink}</p>
+
+                <div style={{ 
+                    backgroundColor: "rgba(255, 92, 0, 0.05)", borderLeft: "4px solid #ff5c00", 
+                    padding: "20px", marginTop: "30px", borderRadius: "0 10px 10px 0" 
+                }}>
+                    <h4 style={{ marginBottom: "10px" }}>Mijn visie & actie:</h4>
+                    <p style={{ margin: 0, lineHeight: "1.6" }}>{data.groeiVisie}</p>
+                </div>
 
                 <button 
-                    onClick={() => setIsOverlayOpen(false)} // Sluit de pop-up
+                    onClick={() => setIsOverlayOpen(false)}
                     style={{
-                        marginTop: "20px",
-                        padding: "10px 20px",
-                        backgroundColor: "#ff5c00",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "5px",
-                        fontSize: "16px",
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                        width: "100%"
+                        marginTop: "30px", padding: "12px 24px", backgroundColor: "transparent",
+                        color: "#ff5c00", border: "2px solid #ff5c00", borderRadius: "30px",
+                        fontSize: "16px", cursor: "pointer", fontWeight: "bold",
+                        width: "100%", transition: "all 0.3s ease"
                     }}
+                    onMouseOver={(e) => { e.target.style.backgroundColor = "#ff5c00"; e.target.style.color = "white"; }}
+                    onMouseOut={(e) => { e.target.style.backgroundColor = "transparent"; e.target.style.color = "#ff5c00"; }}
                 >
-                    Terug naar het project
+                    Sluiten
                 </button>
             </div>
-
         </div>
     );
 }
