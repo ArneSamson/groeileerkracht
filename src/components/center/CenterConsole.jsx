@@ -6,7 +6,7 @@ import HolographicMaterial from '../../helper/HolographicMaterial.jsx'
 import { RigidBody } from '@react-three/rapier'
 
 export function CenterConsole(props) {
-  const { nodes, materials } = useGLTF('../../../public/models/CenterConsole.glb')
+  const { nodes, materials } = useGLTF('/models/CenterConsole.glb')
   const scaleMultiplier = 3; 
 
   const whiteMat = new THREE.MeshStandardMaterial({ color: 0xffffff })
@@ -95,4 +95,4 @@ export function CenterConsole(props) {
 )
 }
 
-useGLTF.preload('../../../public/models/CenterConsole.glb')
+useGLTF.preload('/models/CenterConsole.glb')
