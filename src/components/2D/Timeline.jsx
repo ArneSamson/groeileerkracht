@@ -84,7 +84,7 @@ export default function Timeline() {
 
         <h1>Tijdlijn & Logboek</h1>
         <p className="groeiverslag-sub">
-          Chronologisch overzicht van mijn profileringsstage (Totaal geregistreerd: ~29 uur)
+          Chronologisch overzicht van mijn profileringsstage (Totaal geregistreerd: xx uur)
         </p>
       </header>
 
