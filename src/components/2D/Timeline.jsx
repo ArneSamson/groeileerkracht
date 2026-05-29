@@ -11,37 +11,47 @@ export default function Timeline() {
       bewijzen: [
         { 
           titel: "Notulen eerste ICT-vergadering (Screenshot)", 
-          type: "link", 
-          url: "https://jouwlink.hier/notulen1" 
-        },
-        { 
-          titel: "Notities onderzoek Bookwidgets hack", 
-          type: "link", 
-          url: "https://jouwlink.hier/bookwidgets" 
+          type: "image", 
+          url: "/images/static/notulenVergadering1.png" // Zorg dat de afbeelding in de public folder staat
         },
         { 
           titel: "Voorbeeld van een GRIPA-fiche", 
-          type: "image", 
-          url: "/images/gripa-voorbeeld.jpg" // Zorg dat de afbeelding in de public folder staat
-        }
+          type: "link", 
+          url: "https://gripatest.dlearning.nl/gripa/uploads/Basis%201/O6.%20Infofiche-%20Maak%20een%20inventaris%20van%20alle%20applicaties.pdf" // Zorg dat de afbeelding in de public folder staat
+        },
+        {
+          titel: "Link naar GRIPA platform",
+          type: "link",
+          url: "https://gripa.be/"
+        },
+        { 
+          titel: "Presentatie eerste ICT-vergadering", 
+          type: "link", 
+          url: "https://www.canva.com/design/DAGtbqhkjeI/U-vrBQUmog6bHRfJYG0TQQ/view?utm_content=DAGtbqhkjeI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h77e7098e47#1"
+        },
       ]
     },
     {
       fase: "Fase 2: Management & Structuur",
       datum: "6 januari 2026 — 7 januari 2026",
       titel: "Implementatie van Notion en taakverdeling",
-      beschrijving: "Tijdens de voorbereiding op de tweede grote ICT-vergadering werd duidelijk dat we een strakker systeem nodig hadden om de deadline van Scholengroep 5 (SGR 5) te halen. Op 7 januari heb ik, direct na de vergadering, de workspace 'Notion' opgesteld en geïmplementeerd voor de werkgroep. Hierin digitaliseerden we de notulen, stelden we harde deadlines op en verdeelden we de actiepunten visueel. Dit was een kantelpunt in de efficiëntie van onze samenwerking.",
+      beschrijving: "Tijdens de voorbereiding op de tweede grote ICT-vergadering werd duidelijk dat we een strakker systeem nodig hadden om de deadline van Scholengroep 5 (SGR 5) te halen. Op 7 januari heb ik, direct na de vergadering, de workspace 'Notion' opgesteld en geïmplementeerd voor de werkgroep. Hierin digitaliseerden we de notulen, stelden we harde deadlines op en verdeelden we de actiepunten visueel. Dit was een kantelpunt in onze efficiëntie.",
       bewijzen: [
         { 
           titel: "Notulen tweede ICT-vergadering", 
-          type: "link", 
-          url: "https://jouwlink.hier/notulen2" 
+          type: "image", 
+          url: "/images/static/notulenVergadering2.png" // Zorg dat de afbeelding in de public folder staat
         },
         { 
           titel: "Screenshots van de Notion-workspace", 
           type: "image", 
-          url: "/images/notion-dashboard.jpg" 
-        }
+          url: "/images/static/notion.png" // Zorg dat de afbeelding in de public folder staat
+        },
+        { 
+          titel: "Presentatie tweede ICT-vergadering", 
+          type: "link", 
+          url: "https://www.canva.com/design/DAG6XZtv3wY/Dqm0YvC1DWIE_AMNV6ofSQ/view?utm_content=DAG6XZtv3wY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2120b568c1"
+        },
       ]
     },
     {
@@ -53,12 +63,12 @@ export default function Timeline() {
         { 
           titel: "LinkedIn-post van Kenniscentrum DigiSprong", 
           type: "link", 
-          url: "https://www.linkedin.com/posts/..." 
+          url: "https://www.linkedin.com/feed/update/urn:li:activity:7458234896172343297/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEK7YqcB-jCGIOnE2vNM2P-ijvdKaWqPm3U" 
         },
         { 
           titel: "Foto presentatie delegatie", 
           type: "image", 
-          url: "/images/oecd-pitch.jpg" 
+          url: "/images/static/linkedin.jpg" 
         }
       ]
     },
@@ -69,13 +79,8 @@ export default function Timeline() {
       beschrijving: "Na de succesvolle pitch brak de intensieve schrijffase aan. Geïnspireerd door het plan van GO! Atheneum Heist, werkte ik op 8 mei maar liefst 6 uur lang aan het vormgeven van ons eigen ICT-beleidsplan. Eind mei heb ik het ICT-professionaliseringsplan nagekeken en van gerichte feedback voorzien. Om dit beleid wetenschappelijk en wettelijk te onderbouwen, nam ik de tijd voor een diepgaande literatuurstudie: ik nam de omzendbrief online leren, Vlaams onderzoek rond digitalisering, de SELFIE-tool en de lerarenbevraging omtrent blended learning grondig door.",
       bewijzen: [
         { 
-          titel: "Conceptversie van het ICT-beleidsplan", 
-          type: "link", 
-          url: "https://jouwlink.hier/conceptplan" 
-        },
-        { 
-          titel: "Links naar gebruikte bronnen (Omzendbrief, SELFIE)", 
-          type: "link", 
+          titel: "foto van mijn notities tijdens de literatuurstudie", 
+          type: "image", 
           url: "https://jouwlink.hier/bronnen" 
         }
       ]
