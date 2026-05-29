@@ -56,8 +56,8 @@ export default function Timeline() {
 
   return (
     <div className="groeiverslag-html-container">
-      {/* De header kreeg een relatieve positie zodat de knop absoluut geplaatst kan worden */}
-      <header className="groeiverslag-header" style={{ position: "relative" }}>
+{/* Voeg gridColumn: "1 / -1" toe aan de header style zodat hij het hele scherm pakt */}
+      <header className="groeiverslag-header" style={{ position: "relative", gridColumn: "1 / -1" }}>
         
         {/* SLUIT-KNOP */}
         <button 
@@ -84,7 +84,7 @@ export default function Timeline() {
 
         <h1>Tijdlijn & Logboek</h1>
         <p className="groeiverslag-sub">
-          Chronologisch overzicht van mijn profileringsstage (Totaal geregistreerd: xx uur)
+          Chronologisch overzicht van mijn profileringsstage (Totaal geregistreerd: ~29 uur)
         </p>
       </header>
 

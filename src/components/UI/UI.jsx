@@ -8,6 +8,7 @@ export default function UI() {
 
     const viewMode = useScene((state) => state.viewMode);
     const setViewMode = useScene((state) => state.setViewMode);
+    const isTimelineOpen = useScene((state) => state.isTimelineOpen);
 
      const toggleViewMode = () => {
         setViewMode(viewMode === "3d" ? "2d" : "3d");
@@ -28,6 +29,7 @@ export default function UI() {
                     fontWeight: "bold",
                     height: "38px",
                     width: "200px",
+                    display: isTimelineOpen ? "none" : "block",
                 }}
             >
                 Reset positie
