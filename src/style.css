@@ -884,74 +884,54 @@ summary span {
   margin-top: 40px;
 }
 
-/* --- FIX VOOR 2D WEERGAVE & UI STYLING --- */
+/* ========================================================
+   2D WEERGAVE & UI STYLING (Kwaliteiten, Uitdagingen, Tijdlijn)
+   ======================================================== */
+
 .groeiverslag-html-container {
-  max-width: 1600px; /* Verbreed naar 1600px om 2 kolommen aan te kunnen */
+  max-width: 1600px; 
   margin: 40px auto;
   padding: 50px 60px;
   
-  /* UI Styling */
-  background: rgba(253, 253, 252, 0.85); 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(253, 253, 252, 0.90); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 40px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08); 
   
   font-family: var(--body-family);
   color: var(--neutral-1000);
   line-height: 1.6;
   
-  /* Essentieel om te kunnen scrollen in je vaste 3D root */
   height: calc(100vh - 80px); 
   overflow-y: auto; 
   overflow-x: hidden;
   position: relative;
   z-index: 10;
 
-  /* GRID LAYOUT VOOR 2 KOLOMMEN */
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "header header"
-    "kwaliteiten uitdagingen";
-  gap: 0 60px; /* 60px ruimte tussen de linker en rechter kolom */
+    "intro intro"
+    "kwaliteiten uitdagingen"
+    "timeline timeline"; 
+  gap: 0 60px; 
 }
 
-/* Subtiele scrollbar */
-.groeiverslag-html-container::-webkit-scrollbar {
-  width: 8px;
-}
-.groeiverslag-html-container::-webkit-scrollbar-track {
-  background: transparent;
-  margin: 20px 0;
-}
-.groeiverslag-html-container::-webkit-scrollbar-thumb {
-  background-color: var(--neutral-500);
-  border-radius: 10px;
+/* Scrollbar */
+.groeiverslag-html-container::-webkit-scrollbar { width: 8px; }
+.groeiverslag-html-container::-webkit-scrollbar-track { background: transparent; margin: 20px 0; }
+.groeiverslag-html-container::-webkit-scrollbar-thumb { background-color: var(--neutral-500); border-radius: 10px; }
+
+
+/* --- GRID AREAS --- */
+.intro-section {
+  grid-area: intro;
+  border-bottom: 2px solid rgba(0,0,0,0.05); 
 }
 
-/* Grid Area toewijzingen (Geen React aanpassingen nodig) */
-.groeiverslag-header {
-  grid-area: header;
-  margin-bottom: 40px;
-  text-align: center;
-  border-bottom: 1px solid var(--neutral-500);
-  padding-bottom: 20px;
-}
-
-.groeiverslag-header p {
-  margin-top: 10px;
-  color: var(--neutral-600);
-  font-size: var(--subheading-size);
-}
-
-.groeiverslag-section:nth-of-type(1) {
-  grid-area: kwaliteiten;
-}
-
-.groeiverslag-section:nth-of-type(2) {
-  grid-area: uitdagingen;
-}
+.groeiverslag-section:nth-of-type(1) { grid-area: kwaliteiten; }
+.groeiverslag-section:nth-of-type(2) { grid-area: uitdagingen; }
 
 .groeiverslag-section h2 {
   margin-bottom: 30px;
@@ -959,22 +939,42 @@ summary span {
   font-size: var(--heading3-size);
 }
 
+.timeline-section, 
+div:has(> .timeline-section) {
+  grid-area: timeline;
+  margin-top: 60px; 
+  border-top: 2px solid rgba(0,0,0,0.05);
+  padding-top: 40px;
+}
+
+
+/* --- KAARTEN (Kwaliteiten & Uitdagingen) --- */
+.card-container {
+  margin-top: 40px;
+}
+
 .competentie-card {
   background: transparent;
   border: 1px solid var(--neutral-500);
   border-radius: 30px; 
-  margin-bottom: 40px; /* Meer marge tussen de kaarten onderling */
+  margin-bottom: 40px; 
   overflow: hidden;
 }
 
 .card-header {
   background: rgba(0, 0, 0, 0.03);
-  padding: 24px 30px; /* Ruimere padding in de header */
+  padding: 24px 30px; 
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Voorkomt dat badge stretcht bij lange titels */
+  align-items: center; 
   gap: 20px;
   border-bottom: 1px solid var(--neutral-500);
+}
+
+/* Fix voor afkappen van titels */
+.card-header > div {
+  flex-grow: 1; /* Laat de tekstcontainer de ruimte nemen */
+  min-width: 0; /* Voorkomt flexbox overflow bug */
 }
 
 .card-header h3 {
@@ -982,6 +982,7 @@ summary span {
   margin-bottom: 0;
   font-size: var(--mini-title-size);
   line-height: 1.4;
+  word-wrap: break-word; /* Zorgt dat lange woorden op een nieuwe regel komen */
 }
 
 .badge {
@@ -990,81 +991,54 @@ summary span {
   font-size: 12px;
   font-weight: var(--button-weight);
   font-family: var(--subheading-family);
-  white-space: nowrap; /* Zorgt dat de badge altijd op 1 lijn blijft */
+  white-space: nowrap; 
+  display: inline-block; /* Zorgt voor betere rendering van padding */
 }
 
 .status-remedieren { background: #ffebee; color: #c62828; }
 .status-excelleren { background: #e8f5e9; color: #2e7d32; }
 
 .card-body {
-  padding: 35px 30px; /* Veel meer ademruimte binnenin de kaart */
+  padding: 35px 30px; 
 }
 
 .card-body p {
-  margin-bottom: 24px; /* Ruimte tussen de paragrafen */
-  line-height: 1.8; /* Verhoogde line-height voor leesbaarheid */
+  margin-bottom: 24px; 
+  line-height: 1.8; 
   color: var(--neutral-800);
 }
 
 .card-body p strong {
   color: var(--neutral-1000); 
-  display: block; /* Zet de bold titeltjes op een eigen lijn */
+  display: block; 
   margin-bottom: 6px;
   font-size: 17px;
 }
 
 .ict-link {
-  margin-top: 35px; /* Duidelijke visuele scheiding van de rest */
+  margin-top: 35px; 
   padding: 25px;
   background-color: rgba(255, 92, 0, 0.05); 
   border-left: 4px solid var(--primary-500);
-  border-radius: 0 15px 15px 0; /* Subtiele afronding aan de rechterkant */
+  border-radius: 0 15px 15px 0; 
 }
 
-.ict-link p {
-  margin-bottom: 0; /* Reset de margin voor de laatste paragraaf */
-}
+.ict-link p { margin-bottom: 0; }
 
-/* Responsiviteit: Bij kleinere of smallere schermen (bv. laptops) vallen ze netjes onder elkaar */
-@media (max-width: 1400px) {
-  .groeiverslag-html-container {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "header"
-      "kwaliteiten"
-      "uitdagingen";
-    max-width: 900px;
-  }
-}
-
-@media (max-width: 1000px) {
-  .groeiverslag-html-container {
-    margin: 20px;
-    padding: 30px;
-    height: calc(100vh - 40px);
-    border-radius: 25px;
-  }
-}
 
 /* --- TIMELINE SPECIFIEKE STYLING --- */
-.timeline-section {
-  padding-top: 20px;
-  grid-column: 1 / -1;
-}
-
 .timeline-container {
   position: relative;
-  max-width: 900px;
+  max-width: 1000px; /* Iets breder voor de tekst */
   margin: 0 auto;
 }
 
-/* De verticale lijn in het midden/links */
 .timeline-container::before {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 20px; /* Plaatsing van de lijn */
+  left: 20px; 
   width: 4px;
   background-color: var(--neutral-500);
   border-radius: 4px;
@@ -1072,11 +1046,10 @@ summary span {
 
 .timeline-card {
   position: relative;
-  padding-left: 60px; /* Ruimte maken voor de marker en lijn */
+  padding-left: 60px; 
   margin-bottom: 40px;
 }
 
-/* Het bolletje op de tijdlijn */
 .timeline-marker {
   position: absolute;
   top: 30px;
@@ -1098,8 +1071,11 @@ summary span {
   background: rgba(255, 92, 0, 0.1);
   padding: 6px 12px;
   border-radius: 20px;
+  white-space: nowrap; /* Voorkom dat datum op 2 regels valt */
+  align-self: flex-start; /* Zorgt dat het bovenaan blijft in de flex container */
 }
 
+/* Bewijsstukken */
 .bewijsstukken-container {
   margin-top: 25px;
   padding-top: 20px;
@@ -1118,9 +1094,7 @@ summary span {
   padding-left: 0;
 }
 
-.bewijsstukken-list li {
-  margin-bottom: 8px;
-}
+.bewijsstukken-list li { margin-bottom: 8px; }
 
 .bewijs-link {
   display: inline-flex;
@@ -1141,25 +1115,44 @@ summary span {
   transform: translateX(5px);
 }
 
-/* Responsiviteit voor de tijdlijn */
+
+/* ========================================================
+   RESPONSIVITEIT
+   ======================================================== */
 @media (max-width: 1400px) {
-  .timeline-container {
-    max-width: 100%;
+  .groeiverslag-html-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "kwaliteiten"
+      "uitdagingen"
+      "timeline";
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .groeiverslag-html-container {
+    margin: 20px;
+    padding: 30px;
+    height: calc(100vh - 40px);
+    border-radius: 25px;
   }
 }
 
 @media (max-width: 768px) {
-  .timeline-container::before {
-    left: 10px;
-  }
-  .timeline-marker {
-    left: 0;
-  }
-  .timeline-card {
-    padding-left: 40px;
-  }
+  .timeline-container::before { left: 10px; }
+  .timeline-marker { left: 0; }
+  .timeline-card { padding-left: 40px; }
+  
+  /* Zet de datum onder de titel op mobiel */
   .card-header {
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .timeline-date {
+    align-self: flex-start;
   }
 }

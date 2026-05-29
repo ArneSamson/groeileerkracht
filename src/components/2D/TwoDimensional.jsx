@@ -1,4 +1,5 @@
 import React from "react";
+import TimelineNoInteraction from "./TimelineNoInteraction.jsx";
 
 export default function TwoDimensional() {
 const kwaliteiten = [
@@ -78,56 +79,72 @@ const kwaliteiten = [
   ];
 
   return (
-    <div className="groeiverslag-html-container">
-      <header className="groeiverslag-header">
-        <h1>Mijn Groeileerkracht - Profileringsstage</h1>
-        <p className="groeiverslag-sub">
-          BA Pitzemburg | Inzichten uit praktijk, groei en ICT-beleid
-        </p>
-      </header>
+    <>
+      <div className="groeiverslag-html-container">
+        
+        {/* NIEUWE INTRODUCTIE SECTIE */}
+        <section className="intro-section" style={{ gridColumn: "1 / -1", marginBottom: "40px", textAlign: "center", padding: "40px 20px", background: "rgba(0,0,0,0.02)", borderRadius: "30px" }}>
+          <h1 style={{ fontSize: "var(--heading2-size)", color: "var(--primary-500)", marginBottom: "15px" }}>Mijn Groeileerkracht</h1>
+          <h2 style={{ fontSize: "var(--heading4-size)", fontWeight: "300", color: "var(--neutral-700)", marginBottom: "30px" }}>Profileringsstage: Inzichten uit praktijk en ICT-beleid</h2>
+          
+          <div style={{ maxWidth: "800px", margin: "0 auto", fontSize: "18px", lineHeight: "1.8", color: "var(--neutral-800)" }}>
+            <p style={{ marginBottom: "20px" }}>
+              Welkom bij mijn reflectieverslag. Als leerkracht op <strong>BA Pitzemburg</strong> sta ik dagelijks voor de uitdaging om theorie en praktijk naadloos te verbinden. Tijdens mijn profileringsstage kreeg ik de unieke kans om mee te werken aan het ICT-beleid van de school, in nauwe samenwerking met directie en IT-verantwoordelijken.
+            </p>
+            <p>
+              In dit verslag neem ik je mee door mijn <strong>5 belangrijkste kwaliteiten</strong> en de <strong>5 uitdagingen</strong> waar ik bewust aan werk. Elk van deze punten verbindt mijn ervaringen op de klasvloer direct met de bredere managementlessen die ik leerde achter de schermen van het beleid. Verderop vind je ook mijn chronologische logboek terug.
+            </p>
+          </div>
+        </section>
 
-      <section className="groeiverslag-section">
-        <h2>Mijn 5 Kwaliteiten</h2>
-        <div className="card-container">
-          {kwaliteiten.map((item, index) => (
-            <div className="competentie-card excelleren" key={index}>
-              <div className="card-header">
-                <h3>{item.titel}</h3>
-                <span className="badge status-excelleren">DLR: {item.dlr}</span>
-              </div>
-              <div className="card-body">
-                <p><strong>In de klas:</strong> {item.praktijk}</p>
-                <p><strong>De link met het beleid:</strong> {item.beleidLink}</p>
-                <div className="ict-link">
-                  <p><strong>Mijn visie & actie:</strong> {item.groeiVisie}</p>
+        {/* KWALITEITEN (Blijven in hun kolom via CSS) */}
+        <section className="groeiverslag-section">
+          <h2>Mijn 5 Kwaliteiten</h2>
+          <div className="card-container">
+            {kwaliteiten.map((item, index) => (
+              <div className="competentie-card excelleren" key={index}>
+                <div className="card-header">
+                  <h3>{item.titel}</h3>
+                  <span className="badge status-excelleren">DLR: {item.dlr}</span>
+                </div>
+                <div className="card-body">
+                  <p><strong>In de klas:</strong> {item.praktijk}</p>
+                  <p><strong>De link met het beleid:</strong> {item.beleidLink}</p>
+                  <div className="ict-link">
+                    <p><strong>Mijn visie & actie:</strong> {item.groeiVisie}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
-      <section className="groeiverslag-section">
-        <h2>Mijn 5 Uitdagingen</h2>
-        <div className="card-container">
-          {uitdagingen.map((item, index) => (
-            <div className="competentie-card remedieren" key={index}>
-              <div className="card-header">
-                <h3>{item.titel}</h3>
-                <span className="badge status-remedieren">DLR: {item.dlr}</span>
-              </div>
-              <div className="card-body">
-                <p><strong>In de klas:</strong> {item.praktijk}</p>
-                <p><strong>De link met het beleid:</strong> {item.beleidLink}</p>
-                <div className="ict-link highlight">
-                  <p><strong>Mijn visie & actie:</strong> {item.groeiVisie}</p>
+        {/* UITDAGINGEN (Blijven in hun kolom via CSS) */}
+        <section className="groeiverslag-section">
+          <h2>Mijn 5 Uitdagingen</h2>
+          <div className="card-container">
+            {uitdagingen.map((item, index) => (
+              <div className="competentie-card remedieren" key={index}>
+                <div className="card-header">
+                  <h3>{item.titel}</h3>
+                  <span className="badge status-remedieren">DLR: {item.dlr}</span>
+                </div>
+                <div className="card-body">
+                  <p><strong>In de klas:</strong> {item.praktijk}</p>
+                  <p><strong>De link met het beleid:</strong> {item.beleidLink}</p>
+                  <div className="ict-link highlight">
+                    <p><strong>Mijn visie & actie:</strong> {item.groeiVisie}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-    
+            ))}
+          </div>
+        </section>
+
+        {/* TIJDLIJN (Zal onderaan breed over de 2 kolommen verschijnen via CSS) */}
+        <TimelineNoInteraction  />
+        
+      </div>
+    </>
   );
 }

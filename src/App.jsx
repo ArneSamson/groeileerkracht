@@ -67,7 +67,7 @@ function App() {
                 onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
                 onMouseOut={(e) => e.target.style.transform = "scale(1)"}
               >
-                🎮 Start 3D Ervaring
+                🎮 Start 3D spelervaring
               </button>
               
               <button 
@@ -80,7 +80,7 @@ function App() {
                 onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
                 onMouseOut={(e) => e.target.style.transform = "scale(1)"}
               >
-                📄 Lees 2D Tekstversie
+                📄 Lees 2D tekstversie
               </button>
             </div>
         </div>
