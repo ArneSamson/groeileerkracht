@@ -39,7 +39,7 @@ export function CenterConsole(props) {
                 geometry={nodes.Torus.geometry}
                 material={whiteMat}
             />
-            <Text3D letterSpacing={0} size={0.4} font="public/fonts/inter_Bold.json" position={[-1.2, 2.1, 0]} textAlign="center">
+            <Text3D letterSpacing={0} size={0.4} font="/fonts/Inter_Bold.json" position={[-1.2, 2.1, 0]} textAlign="center">
                 Logboek
                 <meshStandardMaterial color="#ff5c00" />
             </Text3D>
