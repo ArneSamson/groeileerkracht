@@ -40,32 +40,78 @@ function App() {
   return (
     <>
       <div className='root-container'>
-        
-        {!isTimelineOpen && (
+
+        {/* 1. HET KEUZEMENU (LANDING PAGE) */}
+        <div style={{
+            position: "absolute",
+            top: 0, left: 0, width: "100%", height: "100%",
+            display: viewMode === "menu" ? "flex" : "none",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "30px",
+            zIndex: 3, // Ligt onder de Loader (zIndex 4), maar boven de 2D en 3D weergave
+            backgroundColor: "var(--neutral-100, #fdfdfc)" 
+        }}>
+            <h1 style={{ textAlign: "center", padding: "0 20px" }}>Mijn groeileerkracht - Arne Samson</h1>
+            <p style={{ fontSize: "18px", color: "var(--neutral-700)" }}>Kies hoe je dit verslag wil bekijken:</p>
+            
+            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
+              <button 
+                onClick={() => setViewMode("3d")}
+                style={{
+                  padding: "15px 30px", fontSize: "18px", backgroundColor: "var(--primary-500, #ff5c00)", 
+                  color: "white", borderRadius: "30px", border: "none", cursor: "pointer", fontWeight: "bold",
+                  boxShadow: "0 4px 10px rgba(255, 92, 0, 0.3)", transition: "transform 0.2s"
+                }}
+                onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
+                onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+              >
+                🎮 Start 3D Ervaring
+              </button>
+              
+              <button 
+                onClick={() => setViewMode("2d")}
+                style={{
+                  padding: "15px 30px", fontSize: "18px", backgroundColor: "var(--neutral-1000, #000)", 
+                  color: "white", borderRadius: "30px", border: "none", cursor: "pointer", fontWeight: "bold",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)", transition: "transform 0.2s"
+                }}
+                onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
+                onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+              >
+                📄 Lees 2D Tekstversie
+              </button>
+            </div>
+        </div>
+
+        {/* 2. KNOP TERUG NAAR MENU (Verberg in menu of als de tijdlijn open is) */}
+        {!isTimelineOpen && viewMode !== "menu" && (
           <button
-            onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
+            onClick={() => setViewMode("menu")}
             style={{
               position: "absolute",
               zIndex: 999,
               top: 20,
               right: 20,
               padding: "10px 20px",
-              fontSize: "16px",
+              fontSize: "14px",
               cursor: "pointer",
-              backgroundColor: "#007bff",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
+              backgroundColor: "transparent",
+              color: "var(--neutral-1000, #000)",
+              border: "2px solid var(--neutral-1000, #000)",
+              borderRadius: "30px",
               fontWeight: "bold",
-              width: "200px",
-              height: "38px",
+              transition: "all 0.3s ease",
             }}
+            onMouseOver={(e) => { e.target.style.backgroundColor = "var(--neutral-1000, #000)"; e.target.style.color = "white"; }}
+            onMouseOut={(e) => { e.target.style.backgroundColor = "transparent"; e.target.style.color = "var(--neutral-1000, #000)"; }}
           >
-            {viewMode === "3d" ? "Bekijk tekst versie" : "Bekijk game versie"}
+            Terug naar menu
           </button>
         )}
 
-
+        {/* 3. DE 3D CANVAS (Blijft op de achtergrond geladen) */}
         <div style={{
             position: "absolute",
             top: 0,
@@ -91,12 +137,14 @@ function App() {
             shadows={true}
             dpr={window.devicePixelRatio}
           >
-            <Physics paused={viewMode === "2d"}>
+            {/* Pauzeer physics als we in het menu of de 2D weergave zitten! */}
+            <Physics paused={viewMode !== "3d"}>
               <Experience />
             </Physics>
           </Canvas> 
         </div>
 
+        {/* 4. DE 2D WEERGAVE */}
         <div style={{
             position: "absolute",
             top: 0,
@@ -105,13 +153,14 @@ function App() {
             height: "100%",
             display: viewMode === "2d" ? "block" : "none",
             zIndex: 2,
-            backgroundColor: "#fafafa" // Zorg dat dit de achtergrond bedekt
+            backgroundColor: "transparent" 
         }}>
             <TwoDimensional />
         </div>
 
         <Leva />
 
+        {/* LOADER - Ligt met zIndex 4 overal bovenop totdat de modellen geladen zijn */}
         <Loader
           containerStyles={containerStyles}
           barStyles={barStyles}

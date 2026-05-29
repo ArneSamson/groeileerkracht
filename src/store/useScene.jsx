@@ -5,7 +5,7 @@ export default create((set) => {
     enteredKwaliteitenPlain: false,
     isOverlayOpen: false,
     overlayData: null,
-    viewMode: "3d",
+    viewMode: "menu",
     isTimelineOpen: false,
 
     setEnteredKwaliteitenPlain: (entered) => set({ enteredKwaliteitenPlain: entered }),
