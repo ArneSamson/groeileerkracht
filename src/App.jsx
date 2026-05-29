@@ -65,10 +65,7 @@ function App() {
           </button>
         )}
 
-        {/* --- 3D WEERGAVE --- */}
-        {/* We gebruiken absolute positionering en visibility om de canvas te verbergen. 
-            visibility: hidden is veiliger dan display: none voor een WebGL canvas, 
-            omdat het de interne dimensies van de render engine niet breekt. */}
+
         <div style={{
             position: "absolute",
             top: 0,
@@ -76,7 +73,6 @@ function App() {
             width: "100%",
             height: "100%",
             visibility: viewMode === "3d" ? "visible" : "hidden",
-            // Voorkomt dat je in 2D-modus per ongeluk 3D-objecten aanklikt:
             pointerEvents: viewMode === "3d" ? "auto" : "none", 
             zIndex: 1
         }}>
@@ -95,16 +91,12 @@ function App() {
             shadows={true}
             dpr={window.devicePixelRatio}
           >
-            {/* PRO-TIP: Pauzeer de physics engine als we in 2D modus zijn! 
-                Dit bespaart gigantisch veel CPU en batterij op de achtergrond. */}
             <Physics paused={viewMode === "2d"}>
               <Experience />
             </Physics>
           </Canvas> 
         </div>
 
-        {/* --- 2D WEERGAVE --- */}
-        {/* De 2D container ligt een laagje hoger (zIndex) en toont enkel als 2D actief is */}
         <div style={{
             position: "absolute",
             top: 0,
