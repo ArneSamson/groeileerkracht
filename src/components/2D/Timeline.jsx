@@ -9,9 +9,21 @@ export default function Timeline() {
       titel: "Opstart ICT-werkgroep en eerste praktijkonderzoeken",
       beschrijving: "De profileringsstage startte met de voorbereiding en uitvoering van de allereerste ICT-vergadering met directeur Jeroen en ICT-verantwoordelijke Steven. In deze eerste maanden brachten we de huidige status van het ICT-beleid in kaart. Naast het overkoepelende beleid dook ik ook direct in de praktijk: zo heb ik op 6 november een hack binnen Bookwidgets onderzocht om de digitale veiligheid en integriteit van onze evaluaties te waarborgen. Daarnaast vonden er tussentijdse vergaderingen plaats op het bureau van de directeur, onder andere over de GRIPA-fiches.",
       bewijzen: [
-        "Notulen eerste ICT-vergadering (Screenshot)",
-        "Notities onderzoek Bookwidgets hack",
-        "Documentatie GRIPA-fiches"
+        { 
+          titel: "Notulen eerste ICT-vergadering (Screenshot)", 
+          type: "link", 
+          url: "https://jouwlink.hier/notulen1" 
+        },
+        { 
+          titel: "Notities onderzoek Bookwidgets hack", 
+          type: "link", 
+          url: "https://jouwlink.hier/bookwidgets" 
+        },
+        { 
+          titel: "Voorbeeld van een GRIPA-fiche", 
+          type: "image", 
+          url: "/images/gripa-voorbeeld.jpg" // Zorg dat de afbeelding in de public folder staat
+        }
       ]
     },
     {
@@ -20,8 +32,16 @@ export default function Timeline() {
       titel: "Implementatie van Notion en taakverdeling",
       beschrijving: "Tijdens de voorbereiding op de tweede grote ICT-vergadering werd duidelijk dat we een strakker systeem nodig hadden om de deadline van Scholengroep 5 (SGR 5) te halen. Op 7 januari heb ik, direct na de vergadering, de workspace 'Notion' opgesteld en geïmplementeerd voor de werkgroep. Hierin digitaliseerden we de notulen, stelden we harde deadlines op en verdeelden we de actiepunten visueel. Dit was een kantelpunt in de efficiëntie van onze samenwerking.",
       bewijzen: [
-        "Notulen tweede ICT-vergadering (Screenshot)",
-        "Screenshots van de opgestelde Notion-workspace en taakverdeling"
+        { 
+          titel: "Notulen tweede ICT-vergadering", 
+          type: "link", 
+          url: "https://jouwlink.hier/notulen2" 
+        },
+        { 
+          titel: "Screenshots van de Notion-workspace", 
+          type: "image", 
+          url: "/images/notion-dashboard.jpg" 
+        }
       ]
     },
     {
@@ -30,9 +50,16 @@ export default function Timeline() {
       titel: "De OECD Pitch en ontvangst internationale delegatie",
       beschrijving: "Na de derde ICT-vergadering in maart lag de focus op de voorbereiding van een hooggewaardeerd bezoek. Op 7 mei ontvingen we een internationale delegatie van de OECD, de Europese Commissie, en collega's uit Bulgarije en Slowakije. Ik pitchte hier onze didactische aanpak rond ICT-beleid, het gebruik van AI in de klas en de 'pencil metaphor'. Ik toonde concreet lesmateriaal en legde uit hoe we evaluaties (zoals boekbesprekingen en programmeeropdrachten) aanpassen om misbruik van generatieve AI te voorkomen.",
       bewijzen: [
-        "LinkedIn-post van Kenniscentrum DigiSprong / internationale delegatie",
-        "Verzameld lesmateriaal en presentatie delegatie",
-        "Notulen derde ICT-vergadering"
+        { 
+          titel: "LinkedIn-post van Kenniscentrum DigiSprong", 
+          type: "link", 
+          url: "https://www.linkedin.com/posts/..." 
+        },
+        { 
+          titel: "Foto presentatie delegatie", 
+          type: "image", 
+          url: "/images/oecd-pitch.jpg" 
+        }
       ]
     },
     {
@@ -41,9 +68,16 @@ export default function Timeline() {
       titel: "Het formele beleidsplan en literatuurstudie uitschrijven",
       beschrijving: "Na de succesvolle pitch brak de intensieve schrijffase aan. Geïnspireerd door het plan van GO! Atheneum Heist, werkte ik op 8 mei maar liefst 6 uur lang aan het vormgeven van ons eigen ICT-beleidsplan. Eind mei heb ik het ICT-professionaliseringsplan nagekeken en van gerichte feedback voorzien. Om dit beleid wetenschappelijk en wettelijk te onderbouwen, nam ik de tijd voor een diepgaande literatuurstudie: ik nam de omzendbrief online leren, Vlaams onderzoek rond digitalisering, de SELFIE-tool en de lerarenbevraging omtrent blended learning grondig door.",
       bewijzen: [
-        "Conceptversie van het gevormde ICT-beleidsplan",
-        "Aantekeningen / comments op het ICT-professionaliseringsplan",
-        "Links naar gebruikte bronnen (Omzendbrief, SELFIE-tool, Vlaams onderzoek)"
+        { 
+          titel: "Conceptversie van het ICT-beleidsplan", 
+          type: "link", 
+          url: "https://jouwlink.hier/conceptplan" 
+        },
+        { 
+          titel: "Links naar gebruikte bronnen (Omzendbrief, SELFIE)", 
+          type: "link", 
+          url: "https://jouwlink.hier/bronnen" 
+        }
       ]
     }
   ];
@@ -56,7 +90,6 @@ export default function Timeline() {
 
   return (
     <div className="groeiverslag-html-container">
-{/* Voeg gridColumn: "1 / -1" toe aan de header style zodat hij het hele scherm pakt */}
       <header className="groeiverslag-header" style={{ position: "relative", gridColumn: "1 / -1" }}>
         
         {/* SLUIT-KNOP */}
@@ -106,12 +139,19 @@ export default function Timeline() {
                   
                   <div className="bewijsstukken-container">
                     <strong>Gekoppelde bewijsstukken:</strong>
-                    <ul className="bewijsstukken-list">
+                    <ul className="bewijsstukken-list" style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                       {item.bewijzen.map((bewijs, i) => (
                         <li key={i}>
-                          <a href="#" className="bewijs-link">
-                            🔗 {bewijs}
-                          </a>
+                          {bewijs.type === "link" ? (
+                            <a href={bewijs.url} target="_blank" rel="noopener noreferrer" className="bewijs-link" style={{ display: "inline-block", padding: "10px 15px", background: "rgba(255, 92, 0, 0.1)", borderRadius: "8px", textDecoration: "none", color: "var(--primary-500, #ff5c00)", fontWeight: "bold" }}>
+                              🔗 {bewijs.titel}
+                            </a>
+                          ) : bewijs.type === "image" ? (
+                            <div style={{ marginTop: "10px" }}>
+                              <span style={{ display: "block", fontSize: "14px", color: "var(--neutral-700)", marginBottom: "5px" }}>📸 {bewijs.titel}</span>
+                              <img src={bewijs.url} alt={bewijs.titel} style={{ maxWidth: "100%", borderRadius: "12px", border: "1px solid var(--neutral-500)" }} />
+                            </div>
+                          ) : null}
                         </li>
                       ))}
                     </ul>
