@@ -80,7 +80,7 @@ export default function Timeline() {
         { 
           titel: "foto van mijn notities tijdens de literatuurstudie", 
           type: "image", 
-          url: "https://jouwlink.hier/bronnen" 
+          url: "images/static/onderzoek.jpg" 
         }
       ]
     }
