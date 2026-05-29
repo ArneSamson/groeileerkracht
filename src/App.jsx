@@ -8,6 +8,7 @@ import { Canvas } from "@react-three/fiber";
 import { Loader } from "./helper/useLoader";
 import UI from "./components/UI/UI.jsx";
 import OverlayKwaliteiten from "./components/UI/OverlayKwaliteiten.jsx";
+import Timeline from "./components/2D/Timeline.jsx";
 import TwoDimensional from "./components/2D/TwoDimensional.jsx";
 
 import useScene from "./store/useScene.jsx";
@@ -18,8 +19,6 @@ import Experience from "./Experience.jsx";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
-
-
 const camSettings = {
   fov: 55,
   zoom: 1,
@@ -29,89 +28,97 @@ const camSettings = {
 };
 
 function App() {
-
-  const containerStyles = {
-    zIndex: 4,
-    backgroundColor: "#fafafa",
-  };
-  const barStyles = {
-    backgroundColor: "#000000",
-  };
-  const dataStyles = {
-    color: "#272727",
-    fontSize: "16px",
-    lineHeight: "30px",
-    fontWeight: 400,
-  };
-  const innerStyles = {
-    width: "200px",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    gap: "20px",
-  };
+  const containerStyles = { zIndex: 4, backgroundColor: "#fafafa" };
+  const barStyles = { backgroundColor: "#000000" };
+  const dataStyles = { color: "#272727", fontSize: "16px", lineHeight: "30px", fontWeight: 400 };
+  const innerStyles = { width: "200px", display: "flex", justifyContent: "center", flexDirection: "column", gap: "20px" };
 
   const setViewMode = useScene((state) => state.setViewMode);
   const viewMode = useScene((state) => state.viewMode);
+  const isTimelineOpen = useScene((state) => state.isTimelineOpen);
 
   return (
     <>
       <div className='root-container'>
+        
+        {!isTimelineOpen && (
+          <button
+            onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
+            style={{
+              position: "absolute",
+              zIndex: 999,
+              top: 20,
+              right: 20,
+              padding: "10px 20px",
+              fontSize: "16px",
+              cursor: "pointer",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              fontWeight: "bold",
+              width: "200px",
+              height: "38px",
+            }}
+          >
+            {viewMode === "3d" ? "Bekijk tekst versie" : "Bekijk game versie"}
+          </button>
+        )}
 
-      <button
-        onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
-        style={{
-          position: "absolute",
-          zIndex: 999,
-          top: 20,
-          right: 20,
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          backgroundColor: "#007bff",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          fontWeight: "bold",
-          width: "200px",
-          height: "38px",
-        }}
-      >
-          {viewMode === "3d" ? "Bekijk 2D uitleg" : "Bekijk 3D scene"}
-      </button>
-
-
-        {viewMode === "3d" && (<>
+        {/* --- 3D WEERGAVE --- */}
+        {/* We gebruiken absolute positionering en visibility om de canvas te verbergen. 
+            visibility: hidden is veiliger dan display: none voor een WebGL canvas, 
+            omdat het de interne dimensies van de render engine niet breekt. */}
+        <div style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            visibility: viewMode === "3d" ? "visible" : "hidden",
+            // Voorkomt dat je in 2D-modus per ongeluk 3D-objecten aanklikt:
+            pointerEvents: viewMode === "3d" ? "auto" : "none", 
+            zIndex: 1
+        }}>
           <UI />
           <OverlayKwaliteiten />
-            <Canvas
-              className='canvas'
-              camera={camSettings}
-              gl={{
-                antialias: true,
-                outputColorSpace: THREE.SRGBColorSpace,
-                toneMappingExposure: 1,
-                alpha: true,
-              }}
-              shadows={true}
+          <Timeline />
+          <Canvas
+            className='canvas'
+            camera={camSettings}
+            gl={{
+              antialias: true,
+              outputColorSpace: THREE.SRGBColorSpace,
+              toneMappingExposure: 1,
+              alpha: true,
+            }}
+            shadows={true}
             dpr={window.devicePixelRatio}
           >
-            <Physics>
+            {/* PRO-TIP: Pauzeer de physics engine als we in 2D modus zijn! 
+                Dit bespaart gigantisch veel CPU en batterij op de achtergrond. */}
+            <Physics paused={viewMode === "2d"}>
               <Experience />
             </Physics>
           </Canvas> 
-        </>)}
+        </div>
 
-        {viewMode === "2d" && (
-          <TwoDimensional />
-        )}
+        {/* --- 2D WEERGAVE --- */}
+        {/* De 2D container ligt een laagje hoger (zIndex) en toont enkel als 2D actief is */}
+        <div style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: viewMode === "2d" ? "block" : "none",
+            zIndex: 2,
+            backgroundColor: "#fafafa" // Zorg dat dit de achtergrond bedekt
+        }}>
+            <TwoDimensional />
+        </div>
 
-        {/* <ConfigUi /> */}
-
-        <Leva
-        // collapsed
-        //   hidden
-        />
+        <Leva />
 
         <Loader
           containerStyles={containerStyles}
@@ -119,7 +126,6 @@ function App() {
           dataStyles={dataStyles}
           innerStyles={innerStyles}
           dataInterpolation={(p) => `Loading scene: ${p.toFixed(2)}%`}
-          // gifSrc={"/images/GIF/.gif"}
         />
 
       </div>

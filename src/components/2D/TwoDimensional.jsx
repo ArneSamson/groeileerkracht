@@ -128,5 +128,6 @@ const kwaliteiten = [
         </div>
       </section>
     </div>
+    
   );
 }

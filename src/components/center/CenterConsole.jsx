@@ -1,19 +1,37 @@
 
 import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Text3D } from '@react-three/drei'
 import * as THREE from 'three'
 import HolographicMaterial from '../../helper/HolographicMaterial.jsx'
 import { RigidBody } from '@react-three/rapier'
+import { useShallow } from 'zustand/react/shallow'
+import useStore from "../../store/useScene";
+
+
 
 export function CenterConsole(props) {
-  const { nodes, materials } = useGLTF('/models/CenterConsole.glb')
-  const scaleMultiplier = 3; 
+    const { nodes, materials } = useGLTF('/models/CenterConsole.glb')
+    const scaleMultiplier = 3; 
 
-  const whiteMat = new THREE.MeshStandardMaterial({ color: 0xffffff })
+    const whiteMat = new THREE.MeshStandardMaterial({ color: 0xffffff })
+
+    const isTimelineOpen = useStore(useShallow((state) => state.isTimelineOpen));
+    const setIsTimelineOpen = useStore(useShallow((state) => state.setIsTimelineOpen)); 
+
+    const handlePointerOver = () => {
+        document.body.style.cursor = 'pointer'
+    } 
+    const handlePointerOut = () => (document.body.style.cursor = 'auto')
+
+    const handleClick = (e) => {
+        e.stopPropagation(); 
+        setIsTimelineOpen(!isTimelineOpen);
+        console.log("Timeline toggled:", !isTimelineOpen);
+    }
 
   return (
     <>
-        <group {...props} dispose={null} scale={scaleMultiplier}>
+        <group {...props} dispose={null} scale={scaleMultiplier} onClick={handleClick} onPointerOver={handlePointerOver} onPointerOut={handlePointerOut}>
         <RigidBody type="fixed" restitution={0.2} friction={0.7}>
             <mesh
                 castShadow

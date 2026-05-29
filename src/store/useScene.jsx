@@ -6,10 +6,12 @@ export default create((set) => {
     isOverlayOpen: false,
     overlayData: null,
     viewMode: "3d",
+    isTimelineOpen: false,
 
     setEnteredKwaliteitenPlain: (entered) => set({ enteredKwaliteitenPlain: entered }),
     setIsOverlayOpen: (open) => set({ isOverlayOpen: open }),
     setOverlayData: (data) => set({ isOverlayOpen: true, overlayData: data }),
     setViewMode: (mode) => set({ viewMode: mode }),
+    setIsTimelineOpen: (open) => set({ isTimelineOpen: open }),
   };
 });
