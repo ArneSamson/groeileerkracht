@@ -33,7 +33,7 @@ export default function Timeline() {
       beschrijving: "Een volledige dag vergaderen met de vakwerkgroep ICT van Buseleyden Atheneum. In de voormiddag onderzochten we digitale platformen zoals Cisco voor professionalisering, maar ook wat de opties kunnen zijn voor leerlingen. In de namiddag lag de focus op de lespraktijk: welke leerstof moeten leerlingen gezien hebben en hoe pakken collega's op andere campussen dit aan? We bespraken ook de integratie van Smartschool (voor projectevaluaties) en de mogelijkheid om eigen platformen te coderen afhankelijk van didactische noden. Dit alles was zeer interessant om mee te nemen naar het beleidsplan, omdat het een duidelijk beeld gaf van de huidige praktijk en de wensen van collega's. Het was ook een mooie kans om te netwerken en ideeën uit te wisselen met andere ICT-verantwoordelijken binnen de overkoepelende school.",
       bewijzen: [
         { 
-          titel: "Verslag Vakwerkgroep ICT BA", 
+          titel: "Vakwerkgroep ICT BA", 
           type: "image", 
           url: "/images/static/vakwerkgroep.png"
         }
