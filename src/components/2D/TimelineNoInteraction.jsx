@@ -34,7 +34,7 @@ export default function Timeline() {
         { 
           titel: "Verslag Vakwerkgroep ICT BA", 
           type: "image", 
-          url: "/images/static/verslagVakwerkgroep.jpg" // Voeg toe aan public
+          url: "/images/static/vakwerkgroep.png"
         }
       ]
     },
