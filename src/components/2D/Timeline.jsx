@@ -96,151 +96,176 @@ export default function Timeline() {
 
   if (!isTimelineOpen) return null;
 
-  return (
-    <div className="groeiverslag-html-container" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 9999, background: "rgba(253, 253, 252, 0.95)", overflowY: "auto" }}>
+return (
+    // De buitenste div is de donkere "backdrop" (zoals bij de kwaliteiten overlay)
+    <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 9999, background: "rgba(0, 0, 0, 0.4)", display: "flex", justifyContent: "center", alignItems: "center", backdropFilter: "blur(4px)" }}>
       
-      <header className="groeiverslag-header" style={{ position: "relative", gridColumn: "1 / -1", marginBottom: "20px" }}>
-        {/* SLUIT-KNOP */}
-        <button 
-            onClick={() => setIsTimelineOpen(false)}
-            style={{
-                position: "absolute",
-                top: "0px",
-                right: "0px",
-                padding: "8px 20px",
-                backgroundColor: "transparent",
-                color: "var(--primary-500, #ff5c00)",
-                border: "2px solid var(--primary-500, #ff5c00)",
-                borderRadius: "30px",
-                fontSize: "14px",
-                fontWeight: "bold",
-                cursor: "pointer",
-                zIndex: 10,
-                transition: "all 0.3s ease"
-            }}
-            onMouseOver={(e) => { e.target.style.backgroundColor = "var(--primary-500, #ff5c00)"; e.target.style.color = "white"; }}
-            onMouseOut={(e) => { e.target.style.backgroundColor = "transparent"; e.target.style.color = "var(--primary-500, #ff5c00)"; }}
-        >
-            Sluiten
-        </button>
-
-        <h1>Tijdlijn & Logboek</h1>
+      {/* Dit is de daadwerkelijke "kaart" van de tijdlijn */}
+      <div className="groeiverslag-html-container" style={{ 
+          position: "relative", 
+          width: "90%", 
+          maxWidth: "1200px", /* Dit zorgt ervoor dat hij niet het hele scherm vult op grote schermen */
+          height: "85vh", 
+          background: "rgba(253, 253, 252, 0.95)", 
+          overflowY: "auto",
+          borderRadius: "30px", /* Mooie afgeronde hoeken zoals de rest van je UI */
+          padding: "40px",
+          boxShadow: "0px 20px 40px rgba(0,0,0,0.2)",
+          display: "block" /* Forceer block display zodat de CSS grid hierbinnen NIET toegepast wordt en breekt */
+      }}
+      onPointerDown={(e) => e.stopPropagation()} /* Zorgt ervoor dat klikken binnen de kaart niet de backdrop klikt */
+      onPointerUp={(e) => e.stopPropagation()} /* Zorgt ervoor dat klikken binnen de kaart niet de backdrop klikt */
+      onClick={(e) => e.stopPropagation()} /* Zorgt ervoor dat klikken binnen de kaart niet de backdrop klikt */
+      onWheel={(e) => e.stopPropagation()} /* Zorgt ervoor dat scrollen binnen de kaart niet de backdrop scrollt */
+      >
         
-        {/* TAB NAVIGATION */}
-        <div style={{ display: "flex", justifyContent: "center", gap: "15px", marginTop: "20px" }}>
-          <button
-            onClick={() => setActiveTab("chronologie")}
-            style={{
-              padding: "10px 25px",
-              borderRadius: "30px",
-              fontSize: "15px",
-              fontWeight: "bold",
-              border: "1px solid var(--neutral-1000, #000)",
-              backgroundColor: activeTab === "chronologie" ? "var(--neutral-1000, #000)" : "transparent",
-              color: activeTab === "chronologie" ? "white" : "var(--neutral-1000, #000)",
-              cursor: "pointer",
-              transition: "all 0.3s ease"
-            }}
+        <header className="groeiverslag-header" style={{ position: "relative", marginBottom: "20px", textAlign: "center" }}>
+          {/* SLUIT-KNOP */}
+          <button 
+              onClick={() => setIsTimelineOpen(false)}
+              style={{
+                  position: "absolute",
+                  top: "0px",
+                  right: "0px",
+                  padding: "8px 20px",
+                  backgroundColor: "transparent",
+                  color: "var(--primary-500, #ff5c00)",
+                  border: "2px solid var(--primary-500, #ff5c00)",
+                  borderRadius: "30px",
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  zIndex: 10,
+                  transition: "all 0.3s ease"
+              }}
+              onMouseOver={(e) => { e.target.style.backgroundColor = "var(--primary-500, #ff5c00)"; e.target.style.color = "white"; }}
+              onMouseOut={(e) => { e.target.style.backgroundColor = "transparent"; e.target.style.color = "var(--primary-500, #ff5c00)"; }}
           >
-            🗓️ Chronologische Tijdlijn
+              Sluiten
           </button>
-          <button
-            onClick={() => setActiveTab("bewijsstukken")}
-            style={{
-              padding: "10px 25px",
-              borderRadius: "30px",
-              fontSize: "15px",
-              fontWeight: "bold",
-              border: "1px solid var(--neutral-1000, #000)",
-              backgroundColor: activeTab === "bewijsstukken" ? "var(--neutral-1000, #000)" : "transparent",
-              color: activeTab === "bewijsstukken" ? "white" : "var(--neutral-1000, #000)",
-              cursor: "pointer",
-              transition: "all 0.3s ease"
-            }}
-          >
-            📂 Officiële Bewijsstukken
-          </button>
-        </div>
-      </header>
 
-      {/* CHRONOLOGISCHE WEERGAVE */}
-      {activeTab === "chronologie" && (
-        <section className="timeline-section" style={{ gridColumn: "1 / -1" }}>
-          <div className="timeline-container">
-            {timelineData.map((item, index) => (
-              <div className="timeline-card" key={index}>
-                <div className="timeline-marker"></div>
-                <div className="timeline-content competentie-card">
-                  <div className="card-header">
-                    <div>
-                      <span className="badge status-excelleren">{item.fase}</span>
-                      <h3 style={{ marginTop: "10px" }}>{item.titel}</h3>
+          <h1>Tijdlijn & Logboek</h1>
+          <p className="groeiverslag-sub">
+            Chronologisch overzicht van mijn profileringsstage (Totaal geregistreerd: 51u40min)
+          </p>
+          
+          {/* TAB NAVIGATION */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "15px", marginTop: "20px" }}>
+            <button
+              onClick={() => setActiveTab("chronologie")}
+              style={{
+                padding: "10px 25px",
+                borderRadius: "30px",
+                fontSize: "15px",
+                fontWeight: "bold",
+                border: "1px solid var(--neutral-1000, #000)",
+                backgroundColor: activeTab === "chronologie" ? "var(--neutral-1000, #000)" : "transparent",
+                color: activeTab === "chronologie" ? "white" : "var(--neutral-1000, #000)",
+                cursor: "pointer",
+                transition: "all 0.3s ease"
+              }}
+            >
+              🗓️ Chronologische Tijdlijn
+            </button>
+            <button
+              onClick={() => setActiveTab("bewijsstukken")}
+              style={{
+                padding: "10px 25px",
+                borderRadius: "30px",
+                fontSize: "15px",
+                fontWeight: "bold",
+                border: "1px solid var(--neutral-1000, #000)",
+                backgroundColor: activeTab === "bewijsstukken" ? "var(--neutral-1000, #000)" : "transparent",
+                color: activeTab === "bewijsstukken" ? "white" : "var(--neutral-1000, #000)",
+                cursor: "pointer",
+                transition: "all 0.3s ease"
+              }}
+            >
+              📂 Officiële Bewijsstukken
+            </button>
+          </div>
+        </header>
+
+        {/* CHRONOLOGISCHE WEERGAVE */}
+        {activeTab === "chronologie" && (
+          <section className="timeline-section" style={{ marginTop: "40px" }}>
+            <div className="timeline-container">
+              {timelineData.map((item, index) => (
+                <div className="timeline-card" key={index}>
+                  <div className="timeline-marker"></div>
+                  <div className="timeline-content competentie-card">
+                    <div className="card-header">
+                      <div>
+                        <span className="badge status-excelleren">{item.fase}</span>
+                        <h3 style={{ marginTop: "10px" }}>{item.titel}</h3>
+                      </div>
+                      <div className="timeline-date">{item.datum}</div>
                     </div>
-                    <div className="timeline-date">{item.datum}</div>
-                  </div>
-                  <div className="card-body">
-                    <p>{item.beschrijving}</p>
-                    <div className="bewijsstukken-container">
-                      <strong>Gekoppelde bewijsstukken:</strong>
-                      <ul className="bewijsstukken-list" style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", paddingLeft: 0 }}>
-                        {item.bewijzen.map((bewijs, i) => (
-                          <li key={i}>
-                            {bewijs.type === "link" || bewijs.type === "pdf" ? (
-                              <a href={bewijs.url} target="_blank" rel="noopener noreferrer" className="bewijs-link" style={{ display: "inline-block", padding: "10px 15px", background: "rgba(255, 92, 0, 0.1)", borderRadius: "8px", textDecoration: "none", color: "var(--primary-500, #ff5c00)", fontWeight: "bold" }}>
-                                {bewijs.type === "pdf" ? "📄" : "🔗"} {bewijs.titel}
-                              </a>
-                            ) : (
-                              <div style={{ marginTop: "10px" }}>
-                                <span style={{ display: "block", fontSize: "14px", color: "var(--neutral-700)", marginBottom: "5px" }}>📸 {bewijs.titel}</span>
-                                <img src={bewijs.url} alt={bewijs.titel} style={{ maxWidth: "100%", borderRadius: "12px", border: "1px solid var(--neutral-500)" }} />
-                              </div>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="card-body">
+                      <p>{item.beschrijving}</p>
+                      
+                      <div className="bewijsstukken-container">
+                        <strong>Gekoppelde bewijsstukken:</strong>
+                        <ul className="bewijsstukken-list" style={{ display: "flex", flexDirection: "column", gap: "15px", listStyle: "none", paddingLeft: 0 }}>
+                          {item.bewijzen.map((bewijs, i) => (
+                            <li key={i}>
+                              {bewijs.type === "link" || bewijs.type === "pdf" ? (
+                                <a href={bewijs.url} target="_blank" rel="noopener noreferrer" className="bewijs-link" style={{ display: "inline-block", padding: "10px 15px", background: "rgba(255, 92, 0, 0.1)", borderRadius: "8px", textDecoration: "none", color: "var(--primary-500, #ff5c00)", fontWeight: "bold" }}>
+                                  {bewijs.type === "pdf" ? "📄" : "🔗"} {bewijs.titel}
+                                </a>
+                              ) : (
+                                <div style={{ marginTop: "10px" }}>
+                                  <span style={{ display: "block", fontSize: "14px", color: "var(--neutral-700)", marginBottom: "5px" }}>📸 {bewijs.titel}</span>
+                                  <img src={bewijs.url} alt={bewijs.titel} style={{ maxWidth: "100%", borderRadius: "12px", border: "1px solid var(--neutral-500)" }} />
+                                </div>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+              ))}
+            </div>
+          </section>
+        )}
 
-      {/* ENKELE KOLOM BEWIJSSTUKKEN LIJST */}
-      {activeTab === "bewijsstukken" && (
-        <section className="evidence-overview-section" style={{ gridColumn: "1 / -1", padding: "20px 0", maxWidth: "800px", margin: "0 auto", width: "100%" }}>
-          <h2 style={{ textAlign: "center", marginBottom: "30px", color: "var(--primary-500)" }}>Logboek Bewijsmateriaal</h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-            {officieleBewijzen.map((bewijs) => (
-              <div key={bewijs.id} className="competentie-card" style={{ padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0", background: "rgba(0,0,0,0.02)" }}>
-                <h4 style={{ margin: 0, fontSize: "16px", color: "var(--neutral-1000)" }}>{bewijs.titel}</h4>
-                <a 
-                  href={bewijs.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="bewijs-link" 
-                  style={{ 
-                    display: "inline-block", 
-                    padding: "10px 15px", 
-                    background: "rgba(255, 92, 0, 0.1)", 
-                    borderRadius: "8px", 
-                    textDecoration: "none", 
-                    color: "var(--primary-500, #ff5c00)", 
-                    fontWeight: "bold", 
-                    minWidth: "140px", 
-                    textAlign: "center",
-                    transition: "all 0.2s ease"
-                  }}
-                >
-                  {bewijs.type === "pdf" ? "📄 Bekijk PDF" : bewijs.type === "image" ? "📸 Bekijk Foto" : "🔗 Open Link"}
-                </a>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+        {/* ENKELE KOLOM BEWIJSSTUKKEN LIJST */}
+        {activeTab === "bewijsstukken" && (
+          <section className="evidence-overview-section" style={{ padding: "20px 0", maxWidth: "800px", margin: "0 auto", width: "100%" }}>
+            <h2 style={{ textAlign: "center", marginBottom: "30px", color: "var(--primary-500)" }}>Logboek Bewijsmateriaal</h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+              {officieleBewijzen.map((bewijs) => (
+                <div key={bewijs.id} className="competentie-card" style={{ padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0", background: "rgba(0,0,0,0.02)" }}>
+                  <h4 style={{ margin: 0, fontSize: "16px", color: "var(--neutral-1000)" }}>{bewijs.titel}</h4>
+                  <a 
+                    href={bewijs.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bewijs-link" 
+                    style={{ 
+                      display: "inline-block", 
+                      padding: "10px 15px", 
+                      background: "rgba(255, 92, 0, 0.1)", 
+                      borderRadius: "8px", 
+                      textDecoration: "none", 
+                      color: "var(--primary-500, #ff5c00)", 
+                      fontWeight: "bold", 
+                      minWidth: "140px", 
+                      textAlign: "center",
+                      transition: "all 0.2s ease"
+                    }}
+                  >
+                    {bewijs.type === "pdf" ? "📄 Bekijk PDF" : bewijs.type === "image" ? "📸 Bekijk Foto" : "🔗 Open Link"}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
+      </div>
     </div>
   );
 }
