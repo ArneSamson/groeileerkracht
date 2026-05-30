@@ -1,22 +1,53 @@
 import React from "react";
 
 export default function Timeline() {
-    const timelineData = [
+   const timelineData = [
     {
       fase: "Fase 1: Verkenning & Analyse",
-      datum: "16 september 2025 — 10 december 2025",
-      titel: "Opstart ICT-werkgroep en eerste praktijkonderzoeken",
-      beschrijving: "De profileringsstage startte met de voorbereiding en uitvoering van de allereerste ICT-vergadering met directeur Jeroen en ICT-verantwoordelijke Steven. In deze eerste maanden brachten we de huidige status van het ICT-beleid in kaart. Naast het overkoepelende beleid dook ik ook direct in de praktijk: zo heb ik op 6 november een hack binnen Bookwidgets onderzocht om de digitale veiligheid en integriteit van onze evaluaties te waarborgen. Daarnaast vonden er tussentijdse vergaderingen plaats op het bureau van de directeur, onder andere over de GRIPA-fiches.",
+      datum: "16 september 2025 — 17 september 2025",
+      titel: "Opstart ICT-werkgroep en eerste analyses",
+      beschrijving: "De profileringsstage startte met de voorbereiding en uitvoering van de allereerste ICT-vergadering met directeur Jeroen en ICT-verantwoordelijke Steven. Ik begon met het onderzoeken van de bestaande ICT-visietekst, het maken van een SWOT-analyse en het doornemen van eerdere teambevragingen. Tijdens de vergadering zelf legden we de basis: wat is een ICT-beleid, waarom moeten we het opstellen, en hoe beginnen we eraan?",
       bewijzen: [
         { 
-          titel: "Notulen eerste ICT-vergadering (Screenshot)", 
+          titel: "SWOT-analyse", 
           type: "image", 
-          url: "/images/static/notulenVergadering1.png" // Zorg dat de afbeelding in de public folder staat
+          url: "/images/static/swotAnalyse.png"
         },
+        { 
+          titel: "Notulen eerste ICT-vergadering", 
+          type: "image", 
+          url: "/images/static/notulenVergadering1.png"
+        },
+        { 
+          titel: "Presentatie eerste ICT-vergadering", 
+          type: "link", 
+          url: "https://www.canva.com/design/DAGtbqhkjeI/U-vrBQUmog6bHRfJYG0TQQ/view?utm_content=DAGtbqhkjeI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h77e7098e47#1"
+        }
+      ]
+    },
+    {
+      fase: "Fase 2: Vakwerkgroep & Didactiek",
+      datum: "17 oktober 2025",
+      titel: "Campusoverkoepelend ICT-overleg",
+      beschrijving: "Een volledige dag vergaderen met de vakwerkgroep ICT van Buseleyden Atheneum. In de voormiddag onderzochten we digitale platformen zoals Cisco voor professionalisering, maar ook wat de opties kunnen zijn voor leerlingen. In de namiddag lag de focus op de lespraktijk: welke leerstof moeten leerlingen gezien hebben en hoe pakken collega's op andere campussen dit aan? We bespraken ook de integratie van Smartschool (voor projectevaluaties) en de mogelijkheid om eigen platformen te coderen afhankelijk van didactische noden. Dit alles was zeer interessant om mee te nemen naar het beleidsplan, omdat het een duidelijk beeld gaf van de huidige praktijk en de wensen van collega's. Het was ook een mooie kans om te netwerken en ideeën uit te wisselen met andere ICT-verantwoordelijken binnen de overkoepelende school.",
+      bewijzen: [
+        { 
+          titel: "Verslag Vakwerkgroep ICT BA", 
+          type: "image", 
+          url: "/images/static/verslagVakwerkgroep.jpg" // Voeg toe aan public
+        }
+      ]
+    },
+    {
+      fase: "Fase 3: Praktijk, Veiligheid & Lijn Uitzetten",
+      datum: "6 november 2025 — 10 december 2025",
+      titel: "Veiligheid, GRIPA en enquêtes",
+      beschrijving: "Tijdens vergaderingen op het bureau van de directeur bespraken we de aanmaak van een enquête voor het schoolteam en een visualisatie (pencil metaphor) voor leerkrachten. We verdiepten ons in de 'GRIPA-fiches' en de verdeling van de beleidsrollen. We bespraken ook de aanmaak van een 'Wiki-vak' op Smartschool. Daarnaast dook ik in de digitale veiligheid door de beruchte 'Bookwidgets hack' te onderzoeken: hoe garanderen we de integriteit van evaluaties en wat nemen we hierover op in ons beleid?",
+      bewijzen: [
         { 
           titel: "Voorbeeld van een GRIPA-fiche", 
           type: "link", 
-          url: "https://gripatest.dlearning.nl/gripa/uploads/Basis%201/O6.%20Infofiche-%20Maak%20een%20inventaris%20van%20alle%20applicaties.pdf" // Zorg dat de afbeelding in de public folder staat
+          url: "https://gripatest.dlearning.nl/gripa/uploads/Basis%201/O6.%20Infofiche-%20Maak%20een%20inventaris%20van%20alle%20applicaties.pdf"
         },
         {
           titel: "Link naar GRIPA platform",
@@ -24,40 +55,45 @@ export default function Timeline() {
           url: "https://gripa.be/"
         },
         { 
-          titel: "Presentatie eerste ICT-vergadering", 
-          type: "link", 
-          url: "https://www.canva.com/design/DAGtbqhkjeI/U-vrBQUmog6bHRfJYG0TQQ/view?utm_content=DAGtbqhkjeI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h77e7098e47#1"
-        },
+          titel: "Notities onderzoek Bookwidgets hack", 
+          type: "image", 
+          url: "/images/static/bookwidgetsHack.png"
+        }
       ]
     },
     {
-      fase: "Fase 2: Management & Structuur",
-      datum: "6 januari 2026 — 7 januari 2026",
-      titel: "Implementatie van Notion en taakverdeling",
-      beschrijving: "Tijdens de voorbereiding op de tweede grote ICT-vergadering werd duidelijk dat we een strakker systeem nodig hadden om de deadline van Scholengroep 5 (SGR 5) te halen. Op 7 januari heb ik, direct na de vergadering, de workspace 'Notion' opgesteld en geïmplementeerd voor de werkgroep. Hierin digitaliseerden we de notulen, stelden we harde deadlines op en verdeelden we de actiepunten visueel. Dit was een kantelpunt in onze efficiëntie.",
+      fase: "Fase 4: Management & Structuur",
+      datum: "6 januari 2026 — 4 maart 2026",
+      titel: "Implementatie van Notion en prioriteiten",
+      beschrijving: "Tijdens de tweede grote ICT-vergadering (januari) lijsten we de verplichtingen per onderwerp op (cybersecurity, digitale inclusie, infrastructuur). Om de deadline van Scholengroep 5 (SGR 5) te halen, stelde ik direct na de vergadering de workspace 'Notion' op. Hierin digitaliseerden we alle taken en deadlines visueel. Tijdens de derde vergadering (maart) rondden we dit af door concrete kaders te ontwikkelen rond AI, mediawijsheid en inclusie.",
       bewijzen: [
         { 
           titel: "Notulen tweede ICT-vergadering", 
           type: "image", 
-          url: "/images/static/notulenVergadering2.png" // Zorg dat de afbeelding in de public folder staat
+          url: "/images/static/notulenVergadering2.png" 
         },
         { 
           titel: "Screenshots van de Notion-workspace", 
           type: "image", 
-          url: "/images/static/notion.png" // Zorg dat de afbeelding in de public folder staat
+          url: "/images/static/notion.png" 
         },
         { 
           titel: "Presentatie tweede ICT-vergadering", 
           type: "link", 
           url: "https://www.canva.com/design/DAG6XZtv3wY/Dqm0YvC1DWIE_AMNV6ofSQ/view?utm_content=DAG6XZtv3wY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2120b568c1"
         },
+        { 
+          titel: "Presentatie derde ICT-vergadering", 
+          type: "link", 
+          url: "https://www.canva.com/design/DAHBA-Fd6ZI/71_t44IlekNEw0otU6Ka2w/view?utm_content=DAHBA-Fd6ZI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0bf5451da9"
+        }
       ]
     },
     {
-      fase: "Fase 3: Internationale Kennisdeling",
-      datum: "3 maart 2026 — 7 mei 2026",
+      fase: "Fase 5: Internationale Kennisdeling",
+      datum: "6 mei 2026 — 7 mei 2026",
       titel: "De OECD Pitch en ontvangst internationale delegatie",
-      beschrijving: "Na de derde ICT-vergadering in maart lag de focus op de voorbereiding van een hooggewaardeerd bezoek. Op 7 mei ontvingen we een internationale delegatie van de OECD, de Europese Commissie, en collega's uit Bulgarije en Slowakije. Ik pitchte hier onze didactische aanpak rond ICT-beleid, het gebruik van AI in de klas en de 'pencil metaphor'. Ik toonde concreet lesmateriaal en legde uit hoe we evaluaties (zoals boekbesprekingen en programmeeropdrachten) aanpassen om misbruik van generatieve AI te voorkomen.",
+      beschrijving: "Een absoluut hoogtepunt. Na de voorbereiding, waarbij ik uitgewerkt didactisch materiaal verzamelde en vertaalde, ontvingen we een delegatie van de OECD, de Europese Commissie en collega's uit Bulgarije/Slowakije. Ik pitchte ons didactisch ICT-beleid, het gebruik van AI in de klas en voerde inspirerende gesprekken over hoe digitalisering in het buitenland wordt aangepakt.",
       bewijzen: [
         { 
           titel: "LinkedIn-post van Kenniscentrum DigiSprong", 
@@ -72,15 +108,25 @@ export default function Timeline() {
       ]
     },
     {
-      fase: "Fase 4: Consolidatie & Beleidsvorming",
-      datum: "8 mei 2026 — 28 mei 2026",
+      fase: "Fase 6: Consolidatie & Beleidsvorming",
+      datum: "8 mei 2026 — 30 mei 2026",
       titel: "Het formele beleidsplan en literatuurstudie uitschrijven",
-      beschrijving: "Na de succesvolle pitch brak de intensieve schrijffase aan. Geïnspireerd door het plan van GO! Atheneum Heist, werkte ik op 8 mei maar liefst 6 uur lang aan het vormgeven van ons eigen ICT-beleidsplan. Eind mei heb ik het ICT-professionaliseringsplan nagekeken en van gerichte feedback voorzien. Om dit beleid wetenschappelijk en wettelijk te onderbouwen, nam ik de tijd voor een diepgaande literatuurstudie: ik nam de omzendbrief online leren, Vlaams onderzoek rond digitalisering, de SELFIE-tool en de lerarenbevraging omtrent blended learning grondig door.",
+      beschrijving: "Na de pitch brak de intensieve schrijffase aan. Geïnspireerd door het plan van GO! Atheneum Heist vormde ik ons eigen ICT-beleidsplan en voorzag ik het professionaliseringsplan van gerichte feedback. De laatste dagen van mei investeerde ik hevig in een diepgaande literatuurstudie om ons plan wetenschappelijk en wettelijk te onderbouwen. Ik analyseerde onder andere de omzendbrief online leren, de Europese SELFIE-scan, het ICILS-onderzoek naar digitale competenties van 2e jaars en de bevraging over blended learning. Tot slot verwerkte ik dit alles tot heldere, bruikbare beleidsteksten.",
       bewijzen: [
         { 
-          titel: "foto van mijn notities tijdens de literatuurstudie", 
+          titel: "Notities tijdens de literatuurstudie (SELFIE, ICILS, Omzendbrieven)", 
           type: "image", 
-          url: "images/static/onderzoek.jpg" 
+          url: "/images/static/onderzoek.jpg" 
+        },
+        { 
+          titel: "Conceptversie ICT-beleidsplan (Screenshot)", 
+          type: "image", 
+          url: "/images/static/conceptPlan.png"
+        },
+        { 
+          titel: "Feedback op ICT-Professionaliseringsplan", 
+          type: "image", 
+          url: "/images/static/feedbackProfPlan.png"
         }
       ]
     }
@@ -90,7 +136,7 @@ export default function Timeline() {
       <header className="groeiverslag-header" style={{ position: "relative" }}>
         <h1>Tijdlijn & Logboek</h1>
         <p className="groeiverslag-sub">
-          Chronologisch overzicht van mijn profileringsstage (Totaal geregistreerd: xx uur)
+          Chronologisch overzicht van mijn profileringsstage (Totaal geregistreerd: 51u40min)
         </p>
       </header>
 
