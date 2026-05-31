@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { RigidBody, CuboidCollider } from "@react-three/rapier";
+import { useGLTF, Text3D } from '@react-three/drei'
 import { Tandwielen } from "./Tandwielen";
 import { Laptop } from "./Laptop";
 import {Kompas} from "./Kompas";
@@ -37,6 +38,12 @@ export default function KwaliteitsPlain() {
     return (
         <>
             <group position={[-35, 0.05, -35]}>
+
+                
+                <Text3D letterSpacing={0} size={1} font="/fonts/Inter_Bold.json" position={[-3, 0, 14]} rotation={[ - Math.PI / 4, 0, 0]} textAlign="center">
+                    Kwaliteiten
+                    <meshStandardMaterial color="#ff5c00" />
+                </Text3D>
 
                 <Tandwielen position={[-7, 3, -3]} scale={4} rotation={[0, 1, 0]} />
                 <Laptop position={[7, 1, -5]} scale={3} rotation={[0, 0, 0]} />
