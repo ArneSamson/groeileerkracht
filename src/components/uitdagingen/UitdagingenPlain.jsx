@@ -9,6 +9,7 @@ import useStore from "../../store/useScene";
 import { Kraan } from "./extra/Kraan";
 import { Schep } from "./extra/Schep";
 import { Sokkel } from "./Sokkel";
+import { Tekentafel } from "./Tekentafel";
 
 import { Klok } from "./Klok";
 
@@ -46,8 +47,9 @@ export default function UitdagingenPlain() {
                     <meshStandardMaterial color="#ff5c00" />
                 </Text3D>
 
-                <Klok position={[5, 1, -8]} scale={2.5} rotation={[0, 0, 0]} />
-                <Sokkel position={[0, 1, -8]} scale={3} rotation={[0, 0, 0]} />
+                <Sokkel position={[-1, 1, -8]} scale={3} rotation={[0, 0, 0]} />
+                <Klok position={[4, 1, -8]} scale={2.5} rotation={[0, 0, 0]} />
+                <Tekentafel position={[9.5, 1, -8]} scale={3} rotation={[0, -Math.PI / 4, 0]} />
 
                 <CuboidCollider 
                     type="fixed"
