@@ -4,6 +4,7 @@ import { RigidBody, CuboidCollider } from "@react-three/rapier";
 import { Tandwielen } from "./Tandwielen";
 import { Laptop } from "./Laptop";
 import {Kompas} from "./Kompas";
+import { Rubiks } from "./Rubiks";
 import { useShallow } from 'zustand/shallow'
 import useStore from "../../store/useScene";
 
@@ -36,9 +37,10 @@ export default function KwaliteitsPlain() {
         <>
             <group position={[-35, 0.05, -35]}>
 
-                <Tandwielen position={[-7, 3, -5]} scale={4} rotation={[0, 1, 0]} />
+                <Tandwielen position={[-7, 3, -3]} scale={4} rotation={[0, 1, 0]} />
                 <Laptop position={[7, 1, -5]} scale={3} rotation={[0, 0, 0]} />
                 <Kompas position={[0, 1, -5]} scale={3} rotation={[0, 0, 0]} />
+                <Rubiks position={[-7, 1, 4]} scale={2} rotation={[0, -1, 0]} />
 
                 <CuboidCollider 
                     type="fixed"
