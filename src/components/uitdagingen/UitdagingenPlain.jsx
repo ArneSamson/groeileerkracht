@@ -9,6 +9,8 @@ import useStore from "../../store/useScene";
 import { Kraan } from "./extra/Kraan";
 import { Schep } from "./extra/Schep";
 
+import { Klok } from "./Klok";
+
 export default function UitdagingenPlain() {
 
     const isPlayerInside = useStore(useShallow((state) => state.enteredUitdagingenPlain));
@@ -42,6 +44,8 @@ export default function UitdagingenPlain() {
                     Uitdagingen
                     <meshStandardMaterial color="#ff5c00" />
                 </Text3D>
+
+                <Klok position={[0, 1, -5]} scale={3} rotation={[0, 0, 0]} />
 
                 <CuboidCollider 
                     type="fixed"

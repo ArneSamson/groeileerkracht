@@ -1,10 +1,14 @@
 import React from "react";
 import useStore from "../../store/useScene";
+import { useShallow } from 'zustand/shallow'
+
 
 export default function OverlayKwaliteiten() {
     const isOpen = useStore((state) => state.isOverlayOpen);
     const setIsOverlayOpen = useStore((state) => state.setIsOverlayOpen);
     const data = useStore((state) => state.overlayData); // Haal de data op uit de store
+    const enteredKwaliteitenPlain = useStore(useShallow((state) => state.enteredKwaliteitenPlain));
+    const enteredUitdagingenPlain = useStore(useShallow((state) => state.enteredUitdagingenPlain));
 
     // Als hij niet open is OF er is geen data, render niets
     if (!isOpen || !data) return null;
@@ -30,8 +34,10 @@ export default function OverlayKwaliteiten() {
                 
                 <span style={{ 
                     display: "inline-block", padding: "6px 12px", borderRadius: "20px", 
-                    fontSize: "12px", fontWeight: "bold", backgroundColor: "#e8f5e9", 
-                    color: "#2e7d32", marginBottom: "25px" 
+                    fontSize: "12px", fontWeight: "bold", 
+                    backgroundColor: enteredKwaliteitenPlain ? "#e8f5e9" : enteredUitdagingenPlain ? "#ffebee" : "#eee",
+                    color: enteredKwaliteitenPlain ? "#2e7d32" : enteredUitdagingenPlain ? "#c62828" : "#333",
+                    marginBottom: "25px" 
                 }}>
                     DLR: {data.dlr}
                 </span>
