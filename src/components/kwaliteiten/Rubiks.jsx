@@ -9,7 +9,7 @@ import useStore from "../../store/useScene";
 export function Rubiks(props) {
   const { nodes, materials } = useGLTF('/models/Rubiks.glb')
   
-  const kompasRef = useRef()
+  const rubiksRef = useRef()
   
   const part1Ref = useRef()
   const part2Ref = useRef()
@@ -72,7 +72,7 @@ export function Rubiks(props) {
   } 
   const handlePointerOut = () => (document.body.style.cursor = 'auto')
 
-  const kompasData = {
+  const rubiksData = {
       titel: "3. Een innovatieve, frisse blik op onderwijs",
       dlr: "Innovator/Onderzoeker & De gepassioneerde leraar (OLR)",
       praktijk: "Ik weiger theorie in een vacuüm te geven. Ik start lessen vanuit actuele situaties die direct aansluiten bij de jongeren. Collega's, maar vooral de leerlingen, waarderen mijn moderne, leefwereldgerichte aanpak. We experimenteren continu met manieren om onze didactiek te wapenen tegen de opmars van AI. Zo vervangen we standaard boekbesprekingen (die een chatbot in 2 seconden genereert) door opdrachten rond minder bekende boeken met zeer specifieke detailvragen. We forceren leerlingen op een positieve manier om de theorie écht tot zich te nemen.",
@@ -83,7 +83,7 @@ export function Rubiks(props) {
   const handleClick = (e) => {
     if (!enteredKwaliteitenPlain) return;
     e.stopPropagation(); 
-    setOverlayData(kompasData);
+    setOverlayData(rubiksData);
   }
 
   return (
@@ -100,7 +100,7 @@ export function Rubiks(props) {
         </mesh>
       </RigidBody>
       
-      <group ref={kompasRef} scale={0.5} position={[0, 0.5, 0]} rotation={[0, 0, 0]}>
+      <group ref={rubiksRef} scale={0.5} position={[0, 0.5, 0]} rotation={[0, 0, 0]}>
         
         {/* DEEL 1 - Let op: Vaste basis rotatie zit op de buitenste groep */}
         <group rotation={[0, 0, 0]}>

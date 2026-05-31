@@ -40,7 +40,7 @@ export default function KwaliteitsPlain() {
                 <Tandwielen position={[-7, 3, -3]} scale={4} rotation={[0, 1, 0]} />
                 <Laptop position={[7, 1, -5]} scale={3} rotation={[0, 0, 0]} />
                 <Kompas position={[0, 1, -5]} scale={3} rotation={[0, 0, 0]} />
-                <Rubiks position={[-7, 1, 4]} scale={2} rotation={[0, -1, 0]} />
+                <Rubiks position={[-7, 1, 4]} scale={2} rotation={[0, -0.5, 0]} />
 
                 <CuboidCollider 
                     type="fixed"
