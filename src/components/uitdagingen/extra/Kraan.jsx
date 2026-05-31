@@ -33,7 +33,7 @@ export function Kraan(props) {
 
                 // Omdat het een zware kraan is, wachten we lang (tussen de 3 en 8 seconden)
                 // voor we een nieuwe windvlaag / richting bepalen.
-                kraanState.current.timer = 3 + Math.random() * 5;
+                kraanState.current.timer = 1 + Math.random() * 5;
             }
 
             // Vloeiende, TRAGE rotatie. Door delta * 0.5 te gebruiken voelt de kraan enorm zwaar aan.
