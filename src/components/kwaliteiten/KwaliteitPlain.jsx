@@ -5,6 +5,7 @@ import { Tandwielen } from "./Tandwielen";
 import { Laptop } from "./Laptop";
 import {Kompas} from "./Kompas";
 import { Rubiks } from "./Rubiks";
+import { Microphone } from "./Microphone";
 import { useShallow } from 'zustand/shallow'
 import useStore from "../../store/useScene";
 
@@ -40,7 +41,8 @@ export default function KwaliteitsPlain() {
                 <Tandwielen position={[-7, 3, -3]} scale={4} rotation={[0, 1, 0]} />
                 <Laptop position={[7, 1, -5]} scale={3} rotation={[0, 0, 0]} />
                 <Kompas position={[0, 1, -5]} scale={3} rotation={[0, 0, 0]} />
-                <Rubiks position={[-7, 1, 4]} scale={2} rotation={[0, -0.5, 0]} />
+                <Rubiks position={[-7, 0.7, 4]} scale={2} rotation={[0, -0.5, 0]} />
+                <Microphone position={[-7, 0.5, 9]} scale={1} rotation={[0, - Math.PI / 2  , 0]} />
 
                 <CuboidCollider 
                     type="fixed"
