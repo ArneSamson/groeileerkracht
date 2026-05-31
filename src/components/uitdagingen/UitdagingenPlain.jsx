@@ -11,6 +11,7 @@ import { Schep } from "./extra/Schep";
 import { Sokkel } from "./Sokkel";
 import { Tekentafel } from "./Tekentafel";
 import { Drone } from "./Drone";
+import { Borden } from "./Borden";
 
 import { Klok } from "./Klok";
 
@@ -50,8 +51,9 @@ export default function UitdagingenPlain() {
 
                 <Sokkel position={[-1, 1, -8]} scale={3} rotation={[0, 0, 0]} />
                 <Klok position={[4, 1, -8]} scale={2.5} rotation={[0, 0, 0]} />
-                <Tekentafel position={[9.5, 1, -8]} scale={3} rotation={[0, -Math.PI / 4, 0]} />
+                <Tekentafel position={[9, 1, -6]} scale={3} rotation={[0, -Math.PI / 4, 0]} />
                 <Drone position={[10, 1, 0]} scale={3} rotation={[0, 0, 0]} />
+                <Borden position={[10, 1, 7]} scale={1} rotation={[0, -Math.PI / 2.5, 0]} />
 
                 <CuboidCollider 
                     type="fixed"
@@ -98,7 +100,7 @@ export default function UitdagingenPlain() {
                     scale={3}
                 />
                 <Schep
-                    position={[11, 0, 10]}
+                    position={[5, 0, 10]}
                 />
             </group>
         </>
