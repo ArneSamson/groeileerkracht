@@ -10,26 +10,17 @@ export function Microphone(props) {
   const { nodes, materials } = useGLTF('/models/Microphone.glb')
   
   const microphoneRef = useRef()
-  // const gear2Ref = useRef()
-  // const gear3Ref = useRef()
 
   const enteredKwaliteitenPlain = useStore(useShallow((state) => state.enteredKwaliteitenPlain))
   const isOverlayOpen = useStore(useShallow((state) => state.isOverlayOpen));
   
-  // Haal setOverlayData uit de store in plaats van enkel setIsOverlayOpen
   const setOverlayData = useStore(useShallow((state) => state.setOverlayData));
 
-  // useFrame((state, delta) => {
-  //   if (isOverlayOpen) return;
-
-  //   const speed = 1; 
-
-  //   if (gear1Ref.current && gear2Ref.current && gear3Ref.current) {
-  //     gear1Ref.current.rotation.z -= speed * delta / 0.75;
-  //     gear2Ref.current.rotation.z -= speed * delta / 0.75;
-  //     gear3Ref.current.rotation.z += speed * delta;
-  //   }
-  // })
+  useFrame((state) => {
+    if (microphoneRef.current) {
+      microphoneRef.current.position.y = 0.6 +  Math.sin(state.clock.elapsedTime * 2) * 0.1;
+    }
+  })
 
   const handlePointerOver = () => {
     if (!enteredKwaliteitenPlain) return
@@ -37,7 +28,7 @@ export function Microphone(props) {
   } 
   const handlePointerOut = () => (document.body.style.cursor = 'auto')
 
-  const kompasData = {
+  const microphoneData = {
       titel: "5. Professioneel taalbewustzijn",
       dlr: "Schriftelijke en mondelinge taal",
       praktijk: "Tijdens mijn traject heb ik bewust stappen gezet in mijn taalgebruik. Waar ik door mijn enthousiasme soms in informele spreektaal verviel, let ik er nu veel meer op om een verzorgde instructietaal te hanteren met duidelijke signaalwoorden. Ik merk dat die helderheid de leerlingen helpt. Daarnaast moedig ik leerlingen respectvol aan om ook onderling beleefd te communiceren, wat bijdraagt aan een veilig klasklimaat. Ik leer hier zelf nog elke dag in bij, maar ik zie intussen wel een duidelijke, positieve evolutie.",
@@ -50,7 +41,7 @@ export function Microphone(props) {
 
     e.stopPropagation(); 
     
-    setOverlayData(kompasData);
+    setOverlayData(microphoneData);
   }
 
   return (
