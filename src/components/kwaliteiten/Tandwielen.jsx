@@ -84,7 +84,7 @@ export function Tandwielen(props) {
             castShadow
             receiveShadow
             geometry={nodes.Torus001.geometry}
-            material={nodes.Torus001.material}
+            material={materials['Material.002']}
         />
         <mesh
             position={[0.30, -0.30, 0]}
@@ -92,14 +92,14 @@ export function Tandwielen(props) {
             castShadow
             receiveShadow
             geometry={nodes.Torus003.geometry}
-            material={nodes.Torus003.material}
+            material={materials['Material.001']}
         />
         <mesh
             ref={gear3Ref}
             castShadow
             receiveShadow
             geometry={nodes.Torus002.geometry}
-            material={nodes.Torus002.material}
+            material={materials.Material}
         />
     </group>
   )
