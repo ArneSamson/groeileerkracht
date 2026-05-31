@@ -49,11 +49,11 @@ export default function UitdagingenPlain() {
                     <meshStandardMaterial color="#ff5c00" />
                 </Text3D>
 
-                <Sokkel position={[-1, 1, -8]} scale={3} rotation={[0, 0, 0]} />
-                <Klok position={[4, 1, -8]} scale={2.5} rotation={[0, 0, 0]} />
-                <Tekentafel position={[9, 1, -6]} scale={3} rotation={[0, -Math.PI / 4, 0]} />
-                <Drone position={[10, 1, 0]} scale={3} rotation={[0, 0, 0]} />
-                <Borden position={[10, 1, 7]} scale={1} rotation={[0, -Math.PI / 2.5, 0]} />
+                <Sokkel position={[-2, 1, -8]} scale={3} rotation={[0, 0, 0]} />
+                <Klok position={[1.5, 1, -2]} scale={2.5} rotation={[0, 0, 0]} />
+                <Tekentafel position={[7, 1, -8]} scale={3} rotation={[0, -Math.PI / 4, 0]} />
+                <Drone position={[-6, 1, 4]} scale={3} rotation={[0, 0, 0]} />
+                <Borden position={[7, 1, 6]} scale={1} rotation={[0, -Math.PI / 2.5, 0]} />
 
                 <CuboidCollider 
                     type="fixed"
@@ -100,7 +100,7 @@ export default function UitdagingenPlain() {
                     scale={3}
                 />
                 <Schep
-                    position={[5, 0, 10]}
+                    position={[0, 0, 10]}
                 />
             </group>
         </>
