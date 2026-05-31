@@ -1,5 +1,5 @@
 import "./style.css";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Physics } from "@react-three/rapier"
 
@@ -37,6 +37,9 @@ function App() {
   const viewMode = useScene((state) => state.viewMode);
   const isTimelineOpen = useScene((state) => state.isTimelineOpen);
 
+  // Nieuwe state om de pop-up te beheren
+  const [showInstructions, setShowInstructions] = useState(false);
+
   return (
     <>
       <div className='root-container'>
@@ -50,7 +53,7 @@ function App() {
             justifyContent: "center",
             alignItems: "center",
             gap: "30px",
-            zIndex: 3, // Ligt onder de Loader (zIndex 4), maar boven de 2D en 3D weergave
+            zIndex: 3, 
             backgroundColor: "var(--neutral-100, #fdfdfc)" 
         }}>
             <h1 style={{ textAlign: "center", padding: "0 20px" }}>Mijn groeileerkracht - Arne Samson</h1>
@@ -58,7 +61,10 @@ function App() {
             
             <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
               <button 
-                onClick={() => setViewMode("3d")}
+                onClick={() => {
+                  setViewMode("3d");
+                  setShowInstructions(true); // Activeer de pop-up wanneer 3D gekozen wordt
+                }}
                 style={{
                   padding: "15px 30px", fontSize: "18px", backgroundColor: "var(--primary-500, #ff5c00)", 
                   color: "white", borderRadius: "30px", border: "none", cursor: "pointer", fontWeight: "bold",
@@ -85,7 +91,42 @@ function App() {
             </div>
         </div>
 
-        {/* 2. KNOP TERUG NAAR MENU (Verberg in menu of als de tijdlijn open is) */}
+        {/* 1B. INSTRUCTIE POP-UP (Enkel zichtbaar in 3D modus als showInstructions true is) */}
+        {viewMode === "3d" && showInstructions && (
+          <div style={{
+            position: "absolute",
+            top: 0, left: 0, width: "100%", height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            zIndex: 9999, // Ligt bovenop alles
+            display: "flex", justifyContent: "center", alignItems: "center",
+            backdropFilter: "blur(5px)"
+          }}>
+            <div style={{
+               backgroundColor: "#fdfdfc", padding: "40px", borderRadius: "12px",
+               maxWidth: "500px", width: "90%", textAlign: "center",
+               boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+               color: "#333", fontFamily: "sans-serif"
+            }}>
+               <h2 style={{ marginTop: 0 }}>Hoe speel je de game? 🕹️</h2>
+               <p style={{ fontSize: "16px", lineHeight: "1.6", margin: "20px 0" }}>
+                  <strong>Bewegen:</strong> Houd de linkermuisknop (of je vinger op het scherm) ingedrukt in de richting waar je naartoe wil rollen.
+                  <br/><br/>
+                  <strong>Ontdekken:</strong> Rol met je speler in de oplichtende vakken bij de verschillende objecten om de bijbehorende teksten te lezen.
+               </p>
+               <button 
+                  onClick={() => setShowInstructions(false)}
+                  style={{
+                     marginTop: "10px", padding: "12px 24px", fontSize: "16px", backgroundColor: "#ff5c00",
+                     color: "white", borderRadius: "8px", border: "none", cursor: "pointer", fontWeight: "bold", width: "100%"
+                  }}
+               >
+                  Begrepen, let's go!
+               </button>
+            </div>
+          </div>
+        )}
+
+        {/* 2. KNOP TERUG NAAR MENU */}
         {!isTimelineOpen && viewMode !== "menu" && (
           <button
             onClick={() => setViewMode("menu")}
@@ -111,13 +152,10 @@ function App() {
           </button>
         )}
 
-        {/* 3. DE 3D CANVAS (Blijft op de achtergrond geladen) */}
+        {/* 3. DE 3D CANVAS */}
         <div style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
+            top: 0, left: 0, width: "100%", height: "100%",
             visibility: viewMode === "3d" ? "visible" : "hidden",
             pointerEvents: viewMode === "3d" ? "auto" : "none", 
             zIndex: 1
@@ -137,8 +175,8 @@ function App() {
             shadows={true}
             dpr={window.devicePixelRatio}
           >
-            {/* Pauzeer physics als we in het menu of de 2D weergave zitten! */}
-            <Physics paused={viewMode !== "3d"}>
+            {/* Optimalisatie: Pauzeer physics in het menu, 2D weergave OF als de instructies open staan */}
+            <Physics paused={viewMode !== "3d" || showInstructions}>
               <Experience />
             </Physics>
           </Canvas> 
@@ -147,10 +185,7 @@ function App() {
         {/* 4. DE 2D WEERGAVE */}
         <div style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
+            top: 0, left: 0, width: "100%", height: "100%",
             display: viewMode === "2d" ? "block" : "none",
             zIndex: 2,
             backgroundColor: "transparent" 
@@ -158,9 +193,6 @@ function App() {
             <TwoDimensional />
         </div>
 
-        <Leva />
-
-        {/* LOADER - Ligt met zIndex 4 overal bovenop totdat de modellen geladen zijn */}
         <Loader
           containerStyles={containerStyles}
           barStyles={barStyles}
