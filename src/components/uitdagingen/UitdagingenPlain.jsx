@@ -10,6 +10,7 @@ import { Kraan } from "./extra/Kraan";
 import { Schep } from "./extra/Schep";
 import { Sokkel } from "./Sokkel";
 import { Tekentafel } from "./Tekentafel";
+import { Drone } from "./Drone";
 
 import { Klok } from "./Klok";
 
@@ -50,6 +51,7 @@ export default function UitdagingenPlain() {
                 <Sokkel position={[-1, 1, -8]} scale={3} rotation={[0, 0, 0]} />
                 <Klok position={[4, 1, -8]} scale={2.5} rotation={[0, 0, 0]} />
                 <Tekentafel position={[9.5, 1, -8]} scale={3} rotation={[0, -Math.PI / 4, 0]} />
+                <Drone position={[10, 1, 0]} scale={3} rotation={[0, 0, 0]} />
 
                 <CuboidCollider 
                     type="fixed"
