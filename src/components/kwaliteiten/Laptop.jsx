@@ -75,7 +75,7 @@ export function Laptop(props) {
           castShadow
           receiveShadow
           geometry={nodes.Cube003.geometry}
-          material={nodes.Cube003.material}
+          material={materials.Material}
           position={[0, 0.488, 0.135]}
           rotation={[0.346, 0, 0]}
           scale={[0.315, 0.018, 0.315]}
@@ -84,7 +84,7 @@ export function Laptop(props) {
           castShadow
           receiveShadow
           geometry={nodes.Cube004.geometry}
-          material={nodes.Cube004.material}
+          material={materials.Material}
           position={[0, 0.923, -0.204]}
           rotation={[-1.673, 0, 0]}
           scale={[0.315, 0.018, 0.315]}
@@ -93,9 +93,18 @@ export function Laptop(props) {
           castShadow
           receiveShadow
           geometry={nodes.Cube005.geometry}
-          material={nodes.Cube005.material}
+          material={materials['Material.001']}
           position={[0.015, 0.559, 0]}
           scale={[0.038, 0.038, 0.016]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube006.geometry}
+          material={materials['Material.002']}
+          position={[0, 0.923, -0.204]}
+          rotation={[-1.673, 0, 0]}
+          scale={[0.315, 0.018, 0.315]}
         />
       </group>
     </group>
