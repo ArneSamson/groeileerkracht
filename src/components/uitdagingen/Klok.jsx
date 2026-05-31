@@ -10,49 +10,66 @@ export function Klok(props) {
   const { nodes, materials } = useGLTF('/models/Klok.glb')
   
   const klokRef = useRef()
-  // 1. Referentie voor de naald (Cone)
   const needleRef = useRef()
 
   const enteredUitdagingenPlain = useStore(useShallow((state) => state.enteredUitdagingenPlain));
   const isOverlayOpen = useStore(useShallow((state) => state.isOverlayOpen));
   const setOverlayData = useStore(useShallow((state) => state.setOverlayData));
 
-  // 2. Ref om de status van de willekeurige rotatie bij te houden
+  const startOffset = Math.PI / 2.5;
+
+  // 1. We breiden de status uit met specifieke bounce-logica
   const needleState = useRef({
-    targetRotation: 0,
-    timer: 0
+    baseRotation: -Math.PI + startOffset, // De vaste basisrotatie van de naald
+    targetRotation: -Math.PI + startOffset, // Het doel waar de naald naartoe wil draaien
+    timer: 1, // Tikt elke seconde
+    isBouncing: false,
+    bounceDelay: 0
   });
 
   useFrame((state, delta) => {
-    // Zweef-animatie van het hele kompas
+    // Zweef-animatie
     if (klokRef.current) {
-      klokRef.current.position.y = 0.6 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
+      klokRef.current.position.y =  Math.sin(state.clock.elapsedTime * 2) * 0.1;
     }
 
-    // Pauzeer de naald-animatie als de theorie open staat
     if (isOverlayOpen) return;
 
-    // Logica voor de zoekende naald
     if (needleRef.current) {
-      // Tel de tijd af
       needleState.current.timer -= delta;
 
-      // Als de timer op 0 staat, kies een nieuwe willekeurige richting
+      // De spronggrootte: PLUS in plaats van MIN voor clockwise rotatie
+      const tickAmount = (Math.PI * 2) / 60;
+
+      // STAP 1: De naald probeert vooruit te tikken
       if (needleState.current.timer <= 0) {
-        // Genereer een draaiing tussen -180 en +180 graden (-Math.PI tot Math.PI)
-        const randomTurn = (Math.random() - 0.5) * Math.PI * 2;
-        needleState.current.targetRotation += randomTurn;
+        // Zet het doel één seconde vooruit
+        needleState.current.targetRotation = needleState.current.baseRotation + tickAmount;
         
-        // Wacht een willekeurige tijd (tussen de 0.5 en 2.5 seconden) voor de volgende beweging
-        needleState.current.timer = 0.5 + Math.random() * 2;
+        needleState.current.timer = 1; // Probeer het over exact 1 seconde opnieuw
+        
+        // Activeer de terugslag
+        needleState.current.isBouncing = true;
+        // Het mechanisme houdt het ~0.1 seconde vol voordat het faalt
+        needleState.current.bounceDelay = 0.08 + Math.random() * 0.05; 
       }
 
-      // Vloeiende rotatie naar het nieuwe doel. 
-      // Omdat de X-as al 180 graden (Math.PI) gedraaid is, roteert de Z-as de naald perfect over de wijzerplaat.
+      // STAP 2: Het mechanisme weigert en slaat terug
+      if (needleState.current.isBouncing) {
+        needleState.current.bounceDelay -= delta;
+        
+        if (needleState.current.bounceDelay <= 0) {
+          // Val meedogenloos terug naar de vaste basisrotatie
+          needleState.current.targetRotation = needleState.current.baseRotation;
+          needleState.current.isBouncing = false;
+        }
+      }
+
+      // Vloeiende maar UITERST SNELLE rotatie (lerp-factor 35) voor een harde mechanische tik
       needleRef.current.rotation.z = THREE.MathUtils.lerp(
         needleRef.current.rotation.z,
         needleState.current.targetRotation,
-        delta * 2 // Hoe hoger dit getal, hoe sneller en zenuwachtiger de naald reageert
+        delta * 35 
       );
     }
   })
@@ -91,7 +108,7 @@ export function Klok(props) {
         </mesh>
       </RigidBody>
 
-      <group dispose={null}>
+      <group dispose={null} ref={klokRef}>
         <mesh
           castShadow
           receiveShadow
@@ -218,13 +235,15 @@ export function Klok(props) {
           rotation={[-Math.PI, 0, -Math.PI]}
           scale={0.473}
         />
+        
         <mesh
+          ref={needleRef} 
           castShadow
           receiveShadow
           geometry={nodes.Cone001.geometry}
           material={materials['Material.002']}
           position={[-0.001, 1.059, 0.089]}
-          rotation={[-Math.PI, 0, -Math.PI]}
+          rotation={[-Math.PI , 0, -Math.PI ]}
           scale={0.473}
         />
     </group>
@@ -232,4 +251,4 @@ export function Klok(props) {
   )
 }
 
-useGLTF.preload('/models/Kompas.glb')
+useGLTF.preload('/models/Klok.glb')
