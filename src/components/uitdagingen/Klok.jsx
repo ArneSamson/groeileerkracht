@@ -6,14 +6,14 @@ import { RigidBody } from '@react-three/rapier'
 import { useShallow } from 'zustand/shallow'
 import useStore from "../../store/useScene";
 
-export function Kompas(props) {
-  const { nodes, materials } = useGLTF('/models/Kompas.glb')
+export function Klok(props) {
+  const { nodes, materials } = useGLTF('/models/Klok.glb')
   
-  const kompasRef = useRef()
+  const klokRef = useRef()
   // 1. Referentie voor de naald (Cone)
   const needleRef = useRef()
 
-  const enteredKwaliteitenPlain = useStore(useShallow((state) => state.enteredKwaliteitenPlain))
+  const enteredUitdagingenPlain = useStore(useShallow((state) => state.enteredUitdagingenPlain));
   const isOverlayOpen = useStore(useShallow((state) => state.isOverlayOpen));
   const setOverlayData = useStore(useShallow((state) => state.setOverlayData));
 
@@ -25,8 +25,8 @@ export function Kompas(props) {
 
   useFrame((state, delta) => {
     // Zweef-animatie van het hele kompas
-    if (kompasRef.current) {
-      kompasRef.current.position.y = 0.6 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
+    if (klokRef.current) {
+      klokRef.current.position.y = 0.6 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
     }
 
     // Pauzeer de naald-animatie als de theorie open staat
@@ -58,23 +58,23 @@ export function Kompas(props) {
   })
 
   const handlePointerOver = () => {
-    if (!enteredKwaliteitenPlain) return
+    if (!enteredUitdagingenPlain) return
     document.body.style.cursor = 'pointer'
   } 
   const handlePointerOut = () => (document.body.style.cursor = 'auto')
 
-  const kompasData = {
-      titel: "4. Coachend begeleiden",
-      dlr: "Begeleider van leer- en ontwikkelingsprocessen",
-      praktijk: "Bij intensieve, zelfstandige opdrachten, zoals het bouwen van HTML/CSS-projecten of de studiekeuzecarrousel, neem ik een sterk coachende rol aan. Wanneer een leerling vastloopt, vermijd ik de reflex om het probleem onmiddellijk voor hen op te lossen. Ik pas 'Socratisch doorvragen' toe: via gerichte wedervragen help ik hen hun eigen denkproces te ontleden, zodat ze zelfstandig tot het antwoord komen. Observatoren prezen deze aanpak omdat het een veilige, stimulerende leeromgeving creëert.",
-      beleidLink: "Aan de overlegtafel bij Jeroen en Steven, die over decennia aan gecombineerde onderwijservaring beschikken, stelde ik me eveneens ondersteunend op. Ik leerde daar een essentiële managementles: beleid maken (of lesgeven) betekent niet dat je zélf alle antwoorden moet hebben, maar wel dat je de juiste kaders en vragen moet formuleren om samen vooruitgang te boeken.",
-      groeiVisie: "Dit diepgewortelde principe is nu meer present in mijn klaspraktijk. Ik weiger het leerproces van de leerlingen 'over te nemen'. Mijn taak is het ontwerpen van krachtige kaders en het stellen van de juiste vragen, zodat zij de vaardigheden ontwikkelen om het uiteindelijk volledig zelf te kunnen."
+  const klokData = {
+      titel: "2. Administratieve discipline",
+      dlr: "De leraar als organisator",
+      praktijk: "Mijn absolute focus ligt bij de dynamiek in de klas, waardoor de administratieve 'papierwinkel' wel eens in het gedrang komt. Mijn stagebegeleider merkte kritisch op dat mijn stageplanningen en lesvoorbereidingen soms te laat of onvolledig werden ingediend. Het tijdig verbeteren van taken schuif ik nog te vaak voor me uit ten voordele van het lesontwerp zelf.",
+      beleidLink: "De realiteit van de profileringsstage was een harde wake-up call. Vanuit SGR 5 kregen we de onbuigzame eis dat het raamwerk voor het ICT-beleid op 1 september geïmplementeerd moet zijn. Bij de directie zag ik dat uitstelgedrag ontwrichtend werkt. Als een protocol te laat is, loopt de werking van een hele school vast. Ik moest 'Notion', maar ook simpele afspraken, inzetten om niet alleen de werkgroep, maar vooral mezelf, in een strak keurslijf te dwingen.",
+      groeiVisie: "Ik kan niet van een directie verwachten dat ze een school strak runnen, als ik mijn eigen administratie niet beheer. Ik blokkeer nu vaste uren in mijn weekplanning en gebruik digitale systemen om dit hardnekkige uitstelgedrag structureel te elimineren."
     };
 
   const handleClick = (e) => {
-    if (!enteredKwaliteitenPlain) return;
+    if (!enteredUitdagingenPlain) return;
     e.stopPropagation(); 
-    setOverlayData(kompasData);
+    setOverlayData(klokData);
   }
 
   return (
@@ -90,64 +90,145 @@ export function Kompas(props) {
             <meshToonMaterial transparent={true} opacity={0} />
         </mesh>
       </RigidBody>
-      <group ref={kompasRef} scale={0.5} position={[0, 0.5, 0]} rotation={[0, 0, 0]}>
+
+      <group dispose={null}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Torus004.geometry}
+          geometry={nodes.Cylinder002.geometry}
           material={materials.Material}
-          position={[0, 0.341, -0.169]}
-          rotation={[Math.PI / 2, 0, 0]}
+          position={[-0.001, 1.059, -0.002]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
         />
         <mesh
-          ref={needleRef} // 3. Koppel de referentie aan de naald
           castShadow
           receiveShadow
-          geometry={nodes.Cone.geometry}
+          geometry={nodes.Cylinder003.geometry}
           material={materials['Material.002']}
-          position={[0, 0.341, -0.151]}
-          // X blijft op Math.PI, Y en Z starten op 0. De useFrame animeert vanaf nu de Z.
-          rotation={[Math.PI, 0, 0]} 
-          scale={[0.225, 0.684, 0.194]}
+          position={[-0.001, 1.059, -0.002]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Text.geometry}
+          geometry={nodes.Text004.geometry}
           material={materials['Material.001']}
-          position={[-0.135, 1.239, 0.209]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.504}
+          position={[0.172, 1.345, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Text001.geometry}
+          geometry={nodes.Text005.geometry}
           material={materials['Material.001']}
-          position={[0.936, 0.206, 0.209]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.504}
+          position={[0.315, 1.218, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Text002.geometry}
+          geometry={nodes.Text006.geometry}
           material={materials['Material.001']}
-          position={[-0.111, -0.794, 0.209]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.504}
+          position={[0.381, 1.016, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Text003.geometry}
+          geometry={nodes.Text007.geometry}
           material={materials['Material.001']}
-          position={[-1.213, 0.198, 0.209]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.504}
+          position={[0.313, 0.819, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
         />
-      </group>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text008.geometry}
+          material={materials['Material.001']}
+          position={[0.174, 0.673, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text009.geometry}
+          material={materials['Material.001']}
+          position={[-0.036, 0.621, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text010.geometry}
+          material={materials['Material.001']}
+          position={[-0.238, 0.674, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text011.geometry}
+          material={materials['Material.001']}
+          position={[-0.372, 0.814, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text012.geometry}
+          material={materials['Material.001']}
+          position={[-0.43, 1.007, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text013.geometry}
+          material={materials['Material.001']}
+          position={[-0.404, 1.206, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text014.geometry}
+          material={materials['Material.001']}
+          position={[-0.248, 1.366, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Text015.geometry}
+          material={materials['Material.001']}
+          position={[-0.07, 1.4, 0.074]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cone001.geometry}
+          material={materials['Material.002']}
+          position={[-0.001, 1.059, 0.089]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          scale={0.473}
+        />
     </group>
+  </group> 
   )
 }
 
